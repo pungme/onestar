@@ -12,6 +12,7 @@ oneStarApp.controller("MainController",function($scope,$http){
     
 //  Yelp api desn't support sort by rating !!
     $scope.yelpData = {};
+    
     $scope.getYelpReview = function(location,cll){
           $http({
             method: 'POST', 
@@ -29,22 +30,23 @@ oneStarApp.controller("MainController",function($scope,$http){
               console.log("AJAX Error.");
           });
     }
+    
     $scope.getGooglePlaces = function(ll){
-        $http({
-            method: 'GET',
+        
+        $.ajax({
             url: "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + ll +
             "&radius=" + 10000 + 
-//            "&types=" +
-            "&key=" + $scope.GOOGLE_API_KEY
-          }).
-          success(function(data, status, headers, config) {
-              console.log(data);
-//              $scope.fourSqData = data;
-    //          $scope.yelpData = data;
-          }).
-          error(function(data, status, headers, config) {
-              console.log("AJAX Error.");
-          });
+            "&key=" + $scope.GOOGLE_API_KEY,
+//            data: myData,
+            type: 'GET',
+            dataType: 'jsonp',
+            success: function() { 
+//                console.log(data) 
+            },
+            error: function() { 
+                console.log("AJAX fail") 
+            }
+        });
     }
     
     $scope.getFourSquarePlaces= function(ll){
@@ -73,14 +75,14 @@ oneStarApp.controller("MainController",function($scope,$http){
     //let take this as a secondary
     $.get("http://ipinfo.io", function(response) { // get the current city
 //        $scope.getFourSquarePlaces(response.loc);
-        $scope.getGooglePlaces(response.loc);
+//        $scope.getGooglePlaces(response.loc);
 //        console.log(response);
-//        var location = response.city;
+        var location = response.city;
 //        console.log(location);
 //        if(!location){
 //            location = response.country;
 //        }
-//        $scope.getYelpReview(location,response.loc);
+        $scope.getYelpReview(location,response.loc);
 //    console.log(response.city, response.country);
     }, "jsonp");
     

@@ -14,7 +14,7 @@ $DEFAULT_LOCATION = 'San Francisco';
 $SEARCH_LIMIT = 20;
 $SEARCH_PATH = '/v2/search/';
 $SEARCH_SORT = 0;
-$SEARCH_OFFSET = 900;
+$SEARCH_OFFSET = 1000;
 $BUSINESS_PATH = '/v2/business/';
 
 
