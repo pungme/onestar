@@ -10,9 +10,11 @@ require_once('lib/yelpkey.php');
 
 $API_HOST = 'api.yelp.com';
 $DEFAULT_TERM = '';
-$DEFAULT_LOCATION = '';
-$SEARCH_LIMIT = 10;
+$DEFAULT_LOCATION = 'San Francisco';
+$SEARCH_LIMIT = 20;
 $SEARCH_PATH = '/v2/search/';
+$SEARCH_SORT = 0;
+$SEARCH_OFFSET = 900;
 $BUSINESS_PATH = '/v2/business/';
 
 
@@ -72,6 +74,8 @@ function search($term, $location,$cll) {
     $url_params['location'] = $location?: $GLOBALS['DEFAULT_LOCATION'];
     $url_params['cll'] = $cll;
     $url_params['limit'] = $GLOBALS['SEARCH_LIMIT'];
+    $url_params['sort'] = $GLOBALS['SEARCH_SORT'];
+    $url_params['offset'] = $GLOBALS['SEARCH_OFFSET'];
     
     $search_path = $GLOBALS['SEARCH_PATH'] . "?" . http_build_query($url_params);
     
