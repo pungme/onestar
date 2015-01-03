@@ -29,6 +29,10 @@
     <main>
 <!--        <input placeholder="Search" x-webkit-speech autocomplete="off" />-->
 <!--        <header></header>-->
+        <section class="card" ng-show="!isLoaded">
+            <h1>Loading ..</h1>
+            <h2>For better experiences, please allow location access. We never store your location.</h2>
+        </section>
         
         <section class="card" ng-repeat="data in reviewData">
           <div class="image-placeholder" ng-if='data.get("place").get("image")'>

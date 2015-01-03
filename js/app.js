@@ -11,7 +11,7 @@ oneStarApp.controller("MainController",function($scope,$http){
     $scope.CLIENT_SECRET = "RQF2NDLN3ARNLQ3LDSAL2RK5WYTL20E4QW2QFNXBHLLY5IQT";
     $scope.GOOGLE_API_KEY = "AIzaSyAJxIsvGYFXhFHOusqY2r2_jMlyK0TzAnc";
     $scope.reviewData = {};
-    
+    $scope.isLoaded = false;
     $scope.onCardClick = function(){
         $(this).closest('.card').css('color', 'red');
     }
@@ -29,10 +29,10 @@ oneStarApp.controller("MainController",function($scope,$http){
 //        $scope.getYelpReview(location,response.loc);
     }, "jsonp");
     
-    $scope.loadReviewFromParse = function(userPosition){
+    $scope.loadReviewFromParse = function(lat,lon){
         var Reviews = Parse.Object.extend("Reviews");
 //        var Places = Parse.Object.extend("Places");
-        var point = new Parse.GeoPoint({latitude: userPosition.coords.latitude, longitude: userPosition.coords.longitude});
+        var point = new Parse.GeoPoint({latitude: lat, longitude: lon});
 //        var innerQuery = new Parse.Query("Places");
 //        innerQuery.near("location",point);
         var query = new Parse.Query(Reviews);
@@ -45,7 +45,8 @@ oneStarApp.controller("MainController",function($scope,$http){
         query.find({
           success: function(results) {
               $scope.reviewData = results;
-              $scope.calculateDistance(userPosition);
+              $scope.calculateDistance(lat,lon);
+              $scope.isLoaded = true;
               $scope.$apply();
           },
           error: function(error) {
@@ -62,7 +63,6 @@ oneStarApp.controller("MainController",function($scope,$http){
                 callback.success(position);
             },function(){
                 callback.fail();
-                console.log("User Denied.");
             });
         } else {
            callback.fail();
@@ -73,9 +73,14 @@ oneStarApp.controller("MainController",function($scope,$http){
             success:function(userPosition){
     //                      $scope.calculateDistance(userPosition);
     //                        var point = new Parse.GeoPoint({latitude: userPosition.coords.latitude, longitude: userPosition.coords.longitude});
-              $scope.loadReviewFromParse(userPosition);
+              $scope.loadReviewFromParse(userPosition.coords.latitude,userPosition.coords.longitude);
             },
             fail:function(){
+                console.log("User Denied.");
+                $.get("http://ipinfo.io", function(response) { // get the current city
+                     $scope.loadReviewFromParse(parseFloat(response.loc.split(",")[0]),parseFloat(response.loc.split(",")[1]))
+//                    console.log(response);
+                }, "jsonp");
                 //TODO: get from ipinfo.io
             }
       });
@@ -83,12 +88,12 @@ oneStarApp.controller("MainController",function($scope,$http){
 //        console.log(position);
 //    });
     
-    $scope.calculateDistance = function(userPosition){
+    $scope.calculateDistance = function(lat,lon){
 //        console.log(userPosition);
         for(var i = 0; i < $scope.reviewData.length ; i++){
             var data = $scope.reviewData[i];
             var location = data.get("place").get("location");
-            var distance = getDistance(userPosition.coords.latitude, userPosition.coords.longitude, location.latitude, location.longitude, "K");
+            var distance = getDistance(lat,lon, location.latitude, location.longitude, "K");
             $scope.reviewData[i].distance = Math.round(distance * 10) / 10;
         }
         console.log($scope.reviewData);
