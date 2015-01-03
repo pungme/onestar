@@ -9,7 +9,7 @@ main {
   display:block;
   position:relative;
 /*  width:30rem;*/
-  margin:12vh auto;
+  margin:8vh auto;
   padding:1.5rem 0 0;
 /*  background:#d5d5d5;*/
   outline
@@ -24,10 +24,6 @@ body:hover main .card{
   transform:scale(1);
 }
 */
-.card:hover { 
-    transform: scale(1.05);
-    z-index: 999;
-}
 
 header {
 /*  position:absolute;*/
@@ -52,6 +48,7 @@ header {
 header h1{
     text-align: center;
     color: aliceblue;
+    margin-top: 23px;
   -webkit-transition: margin .5s ease-out;
   -moz-transition: margin .5s ease-out;
   -o-transition: margin .5s ease-out;
@@ -99,6 +96,17 @@ input:focus + header {
 /*    min-height: 246px;*/
 }
 
+.card:hover { 
+    transform: scale(1.05);
+    z-index: 999;
+}
+/*
+.card:active {
+    width: 70px;
+    height: 500px;
+}
+*/
+
 .card:nth-child(even){
   animation-name:fly-in-from-right;
   animation-delay:1.1s;
@@ -145,9 +153,11 @@ h1 span{
     font-size: 15px;
     margin-left:   10px;
 }
+
 strong {
     font-weight:300;
-    color:#539D00;
+    color: cornflowerblue;
+/*    color:#539D00;*/
 }
 
 h2 {
@@ -162,8 +172,8 @@ h2 {
   background:whitesmoke;
   margin:.5rem 0 0 -1.5rem;
   width:28rem;
-
 }
+
 /*For the naigation*/
 .nav-up {
 /*    top: -160px;*/
@@ -177,17 +187,17 @@ h2 {
 .image-placeholder{
     float: left;
     margin-right: 16px;
-    width: 250px;
+/*    width: 250px;*/
     height: 250px;
 }
 
 .image-placeholder img {
-    
-        -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
-       -moz-animation: fadein 2s; /* Firefox < 16 */
-        -ms-animation: fadein 2s; /* Internet Explorer */
-         -o-animation: fadein 2s; /* Opera < 12.1 */
-            animation: fadein 2s;
+    height: 250px;
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+   -moz-animation: fadein 2s; /* Firefox < 16 */
+    -ms-animation: fadein 2s; /* Internet Explorer */
+     -o-animation: fadein 2s; /* Opera < 12.1 */
+        animation: fadein 2s;
 
 }
 @keyframes fadein {
@@ -229,3 +239,31 @@ h2 {
     right: -30px;
     top: -11px;
 }
+
+footer h1{
+    font-size: 15px;
+}
+/*
+.animate-if {
+  background:white;
+  border:1px solid black;
+  padding:10px;
+}
+*/
+
+/*
+.animate-if.ng-enter, .animate-if.ng-leave {
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+
+.animate-if.ng-enter,
+.animate-if.ng-leave.ng-leave-active {
+  opacity:0;
+}
+
+.animate-if.ng-leave,
+.animate-if.ng-enter.ng-enter-active {
+  opacity:1;
+}
+*/
