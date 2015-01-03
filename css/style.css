@@ -94,7 +94,7 @@ input:focus + header {
   animation:fly-in-from-left .5s 1s ease both;
 /*  transform-origin:top left;*/
     transform-origin:center 3rem;
-  transition:transform .3s;
+  transition:all .3s;
     overflow: hidden;
 /*    min-height: 246px;*/
 }
@@ -119,6 +119,7 @@ input:focus + header {
   }
 }
 
+/*
 .card:after {
   position:absolute;
   font-size:.9rem;
@@ -133,16 +134,21 @@ input:focus + header {
   border-radius:50%;
   pointer-events:none;
 }
+*/
 
 h1 {
     font-size:  25px;
 /*  font-size:1.5rem;*/
   font-weight:200;
 }
-  strong {
+h1 span{
+    font-size: 15px;
+    margin-left:   10px;
+}
+strong {
     font-weight:300;
     color:#539D00;
-  }
+}
 
 h2 {
   font-size:.9rem;
@@ -211,4 +217,15 @@ h2 {
 @-o-keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
+}
+
+
+.line1 {
+    width: 80px;
+    height: 47px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+    -webkit-transform: translateY(0px) translateX(0px) rotate(45deg);
+    position: absolute;
+    right: -30px;
+    top: -11px;
 }
