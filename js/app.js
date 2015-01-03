@@ -88,7 +88,6 @@ oneStarApp.controller("MainController",function($scope,$http){
     
 //    console.log("it works !");
 });
-
 //function getLocation() {
 //    if (navigator.geolocation) {
 //        navigator.geolocation.getCurrentPosition(showPosition);
