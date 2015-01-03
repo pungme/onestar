@@ -61,7 +61,7 @@ input, .card {
 }
 input {
   display:block;
-  width:26rem;
+  width:16rem;
   margin:4.5rem 1rem 2rem;
   border:0;
   font-size:1.2rem;
@@ -72,7 +72,10 @@ input {
 }
 
 input:focus {
-  margin:0 1rem 1rem;
+    margin: 0rem -1rem 2rem;
+/*  margin:0 1rem 1rem;*/
+/*  width:28rem;*/
+    width: 100%;
   outline:0;
 }
 
@@ -98,6 +101,7 @@ input:focus + header {
 
 .card:hover { 
     transform: scale(1.05);
+    box-shadow: 4px 4px 20px #C3C3C3;
     z-index: 999;
 }
 /*
@@ -113,6 +117,7 @@ input:focus + header {
 /*  transform-origin:top right;*/
 }
 
+/*
 @keyframes fly-in-from-left {
   from {
     transform:translateY(15rem) rotate(15deg);
@@ -123,6 +128,23 @@ input:focus + header {
 @keyframes fly-in-from-right {
   from {
     transform:translateY(15rem) rotate(-15deg);
+    opacity:0;
+  }
+}
+*/
+
+@keyframes fly-in-from-left {
+  from {
+    transform:translateY(15rem) rotate(15deg);
+    -webkit-transform:translateY(15rem) rotate(15deg);
+    opacity:0;
+  }
+}
+
+@keyframes fly-in-from-right {
+  from {
+    transform:translateY(15rem) rotate(-15deg);
+    -webkit-transform:translateY(15rem) rotate(-15deg);
     opacity:0;
   }
 }

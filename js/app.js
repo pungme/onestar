@@ -16,18 +16,18 @@ oneStarApp.controller("MainController",function($scope,$http){
         $(this).closest('.card').css('color', 'red');
     }
     
-    $.get("http://ipinfo.io", function(response) { // get the current city
-        console.log(response);
-//        $scope.getFourSquarePlaces(response.loc);
-//        $scope.getGooglePlaces(response.loc);
+//    $.get("http://ipinfo.io", function(response) { // get the current city
 //        console.log(response);
-//        var location = response.city;
-//        console.log(location);
-//        if(!location){
-//            location = response.country;
-//        }
-//        $scope.getYelpReview(location,response.loc);
-    }, "jsonp");
+////        $scope.getFourSquarePlaces(response.loc);
+////        $scope.getGooglePlaces(response.loc);
+////        console.log(response);
+////        var location = response.city;
+////        console.log(location);
+////        if(!location){
+////            location = response.country;
+////        }
+////        $scope.getYelpReview(location,response.loc);
+//    }, "jsonp");
     
     $scope.loadReviewFromParse = function(lat,lon){
         var Reviews = Parse.Object.extend("Reviews");
