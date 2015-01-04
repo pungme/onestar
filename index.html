@@ -37,12 +37,12 @@
         </section>
         
         <section class="card" ng-repeat="data in reviewData">
-          <div class="image-placeholder" ng-if='data.get("place").get("image")'>
-            <img ng-src='{{data.get("place").get("image").url()}}'> 
+          <div class="image-placeholder" ng-if='data.get("place").get("image_url")'>
+            <img ng-src='{{data.get("place").get("image_url")}}'> 
           </div>
           <div>
               <h1 style="margin-top: 5px;"><strong>{{data.get('place').get('name')}} </strong>
-                  <span> {{data.get('place').get('location_name')}}</span>
+                  <span> {{data.get('place').get('city')}}  {{data.get('place').get('street')}}  {{data.get('place').get('zip')}}  </span>
               </h1>
               <h1>
                   {{data.get('review_text')}}
@@ -61,7 +61,7 @@
 
         <footer>
             <center><h1>created by <a href="http://www.twitter.com/pungme" target="_blank">@pungme</a></h1></center>
-            <center><h1>read our Manifesto</h1></center>
+            <center><h1><a href="manifesto.html" target="_blank">read manifesto</a></h1></center>
         </footer>
     
 <!--    {{fourSqData}}-->
