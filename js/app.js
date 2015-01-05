@@ -16,6 +16,20 @@ oneStarApp.controller("MainController",function($scope,$http){
         $(this).closest('.card').css('color', 'red');
     }
     
+    /////////// TODO: move this to core-graphic.js ///////////
+    $scope.searchFocus = function(){
+        console.log("focus !!");
+        $('#circle-logo ').css('width', '50px').css('height','50px');
+        $('#star-logo').css('width', '40px').css('margin-top','4px');
+    }
+    
+    $scope.searchBlur = function(){
+        $('#circle-logo ').css('width', '100px').css('height','100px');
+        $('#star-logo').css('width', '80px').css('margin-top','9px');
+        console.log("blur !!");
+    }
+    /////////// TODO: move this to core-graphic.js ///////////
+    
 //    $.get("http://ipinfo.io", function(response) { // get the current city
 //        console.log(response);
 ////        $scope.getFourSquarePlaces(response.loc);
