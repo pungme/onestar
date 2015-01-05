@@ -164,25 +164,8 @@ oneStarApp.controller("MainController",function($scope,$http){
       });
         
     }
-    
-    
-    
-    
-    //let take this as a secondary
-//    $.get("http://ipinfo.io", function(response) { // get the current city
-//        console.log(response);
-////        $scope.getFourSquarePlaces(response.loc);
-////        $scope.getGooglePlaces(response.loc);
-////        console.log(response);
-////        var location = response.city;
-////        console.log(location);
-////        if(!location){
-////            location = response.country;
-////        }
-////        $scope.getYelpReview(location,response.loc);
-//    }, "jsonp");
 });
-
+//FB.init();
 
 
 //function getLocation() {
