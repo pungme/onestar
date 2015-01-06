@@ -5,6 +5,20 @@ oneStarApp.config(function($httpProvider){
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 });
 
+//oneStarApp.directive('scrollTo', function() {
+//    return {
+//        restrict: 'A',
+//        link: function(scope, element, attrs) {
+//             scope.$watch('selectedIndex', function(newVal, oldVal) {
+//                 if (newVal && newVal !== oldVal) {
+////                     $('main').scrollTop(element.find('.card').eq(newVal).position().top)                     
+//                 }                 
+//            });
+//        }
+//    };
+//});
+
+
 oneStarApp.controller("MainController",function($scope,$http){
     
     $scope.CLIENT_ID = "PHKKTXSG2M0I5CXJFKZKXQ4ALX3G3CO13YASIUEX3OPTEKWV";
@@ -12,13 +26,47 @@ oneStarApp.controller("MainController",function($scope,$http){
     $scope.GOOGLE_API_KEY = "AIzaSyAJxIsvGYFXhFHOusqY2r2_jMlyK0TzAnc";
     $scope.reviewData = {};
     $scope.isLoaded = false;
-    $scope.onCardClick = function(){
-        $(this).closest('.card').css('color', 'red');
-    }
+    $scope.selectedIndex = -1;
     
     /////////// TODO: move this to core-graphic.js ///////////
+//    $scope.cardClick = function($index){
+//        $scope.selectedIndex = $index;
+////        console.log("here");
+////        $(this).closest('.card').css('height', '600px');
+//    }
+    $scope.getNearbyPlacesFromFacebook = function(){
+          $http({
+            method: 'POST', 
+            url: 'php/facebook.php'
+          }).
+          success(function(data, status, headers, config) {
+              console.log(data);
+          }).
+          error(function(data, status, headers, config) {
+              console.log("AJAX Error.");
+          });
+    }
+    $scope.getNearbyPlacesFromFacebook();
+    
+    $scope.facebookLogin = function(){
+        Parse.FacebookUtils.logIn(null, {
+          success: function(user) {
+              console.log(user);
+            if (!user.existed()) {
+              console.log("User signed up and logged in through Facebook!");
+            } else {
+              console.log("User logged in through Facebook!");
+//                $scope.getNearbyPlacesFromFacebook();
+                //https://graph.facebook.com/search?type=place&center=48.1776759,11.5982435&distance=1000 
+            }
+          },
+          error: function(user, error) {
+            console.log("User cancelled the Facebook login or did not fully authorize.");
+          }
+        });
+    }
+    
     $scope.searchFocus = function(){
-        console.log("focus !!");
         $('#circle-logo ').css('width', '50px').css('height','50px');
         $('#star-logo').css('width', '40px').css('margin-top','4px');
     }
@@ -26,36 +74,27 @@ oneStarApp.controller("MainController",function($scope,$http){
     $scope.searchBlur = function(){
         $('#circle-logo ').css('width', '100px').css('height','100px');
         $('#star-logo').css('width', '80px').css('margin-top','9px');
-        console.log("blur !!");
     }
     /////////// TODO: move this to core-graphic.js ///////////
     
-//    $.get("http://ipinfo.io", function(response) { // get the current city
-//        console.log(response);
-////        $scope.getFourSquarePlaces(response.loc);
-////        $scope.getGooglePlaces(response.loc);
-////        console.log(response);
-////        var location = response.city;
-////        console.log(location);
-////        if(!location){
-////            location = response.country;
-////        }
-////        $scope.getYelpReview(location,response.loc);
-//    }, "jsonp");
-    
+    $scope.cardClick = function($index){
+        $scope.selectedIndex = $index;
+        setTimeout(scrollToCards, 200);
+        function scrollToCards(){
+            $('body').animate({
+                scrollTop: $(".card-selected").offset().top - 40
+            }, 800);
+        }
+    }
+        
     $scope.loadReviewFromParse = function(lat,lon){
         var Reviews = Parse.Object.extend("Reviews");
-//        var Places = Parse.Object.extend("Places");
         var point = new Parse.GeoPoint({latitude: lat, longitude: lon});
-//        var innerQuery = new Parse.Query("Places");
-//        innerQuery.near("location",point);
         var query = new Parse.Query(Reviews);
-//        query.matchesQuery("place",innerQuery);
         query.include("place");
         query.near("location", point);
         query.limit(20);
 //      TODO : query and get the closet one first.
-        
         query.find({
           success: function(results) {
               $scope.reviewData = results;
@@ -83,24 +122,19 @@ oneStarApp.controller("MainController",function($scope,$http){
            console.log("Geolocation is not supported by this browser.");
         }
     }
-      $scope.getLocation({
+    
+    $scope.getLocation({
             success:function(userPosition){
-    //                      $scope.calculateDistance(userPosition);
-    //                        var point = new Parse.GeoPoint({latitude: userPosition.coords.latitude, longitude: userPosition.coords.longitude});
               $scope.loadReviewFromParse(userPosition.coords.latitude,userPosition.coords.longitude);
             },
             fail:function(){
                 console.log("User Denied.");
                 $.get("http://ipinfo.io", function(response) { // get the current city
                      $scope.loadReviewFromParse(parseFloat(response.loc.split(",")[0]),parseFloat(response.loc.split(",")[1]))
-//                    console.log(response);
                 }, "jsonp");
                 //TODO: get from ipinfo.io
             }
-      });
-//    $scope.getLocation(function(position){
-//        console.log(position);
-//    });
+    });
     
     $scope.calculateDistance = function(lat,lon){
 //        console.log(userPosition);
@@ -110,9 +144,8 @@ oneStarApp.controller("MainController",function($scope,$http){
             var distance = getDistance(lat,lon, location.latitude, location.longitude, "K");
             $scope.reviewData[i].distance = Math.round(distance * 10) / 10;
         }
-        console.log($scope.reviewData);
-//        $scope.$apply();
-//       var distance = getDistance(userPosition.coords.latitude, userPosition.coords.longitude, lat2, lon2, "K");
+//        console.log($scope.reviewData);
+
     }
     
     
@@ -141,6 +174,7 @@ oneStarApp.controller("MainController",function($scope,$http){
           });
     }
     
+//    $scope.getYelpReview();
     $scope.getGooglePlaces = function(ll){
         
         $.ajax({

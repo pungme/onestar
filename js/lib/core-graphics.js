@@ -40,18 +40,20 @@ function hasScrolled() {
     
     lastScrollTop = st;
 }
-setTimeout(doSomething, 1000);
 
-function doSomething() {
+//$(".card").click(function() {
+//    console.log("here");
+//  $(this).css('height', '600px');
+//});
+
+
+setTimeout(applyShadow, 1000);
+
+function applyShadow() {
     $("#star-logo").realshadow({style:'flat',type:'drop',color: '84,131,218',length: 5});
     $("#circle-logo").realshadow({style:'flat',type:'drop',color: '84,131,218',length: 5});
    //do whatever you want here
 }
-//var $flat = document.getElementById('star-logo');
-//        realshadow($flat.getElementsByTagName('span'), {type: 'text', style: 'flat', length: 40, color: '255,160,0'});
-//        realshadow($flat.getElementsByTagName('i'), {type: 'text', style: 'flat', length: 40, color: '100,100,255'});
-//        realshadow($flat.getElementsByTagName('b'), {type: 'text', style: 'flat', length: 40, color: '100,200,0'});
-//        realshadow($flat.getElementsByTagName('u'), {type: 'text', style: 'flat', length: 40, color: '255,100,100'});
 
 //$("#star-logo").realshadow({
 //

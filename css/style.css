@@ -28,7 +28,7 @@ body:hover main .card{
 
 header {
 /*  position:absolute;*/
-  background-color: cornflowerblue;
+/*  background-color: cornflowerblue;*/
   position: fixed;
   z-index:0;
   top:0; left:0; right:0;
@@ -67,7 +67,9 @@ header img{
   -o-transition: all .5s ease-out;
   transition: all .5s ease-out;
 }
-
+header img:active{
+    transform: scale(1.1);
+}
 
 input, .card {
   position:relative;
@@ -124,11 +126,40 @@ input:focus + header {
   animation:fly-in-from-left .5s 1s ease both;
 /*  transform-origin:top left;*/
   transform-origin:center 3rem;
-  transition:all .3s;
+  transition:all .5s; 
+  -webkit-transition:all .5s; 
+  -moz-transition:all .5s; 
+  -o-transition:all .5s; 
     overflow: hidden;
+/*    height: 300px;*/
 /*    min-height: 246px;*/
 }
-
+.card-selected{
+/*
+          -webkit-transition: all .5s ease-out;
+  -moz-transition: all .5s ease-out;
+  -o-transition: all .5s ease-out;
+  transition: all .5s ease-out;
+*/
+/*
+    padding:1.5rem 1.5rem 1.5rem 1.5rem;
+  box-shadow:0 1px 2px #aaa;
+  background:white;
+  margin:0 1rem 1.5rem;
+  border-radius:3px;
+  user-select:none;
+  animation:fly-in-from-left .5s 1s ease both;
+  transform-origin:top left;
+  transform-origin:center 3rem;
+  transition:all .3s;
+    overflow: hidden;
+*/
+      transition:all .5s; 
+  -webkit-transition:all .5s; 
+  -moz-transition:all .5s; 
+  -o-transition:all .5s; 
+    min-height: 750px;
+}
 .card:hover { 
 /*    -webkit-transform: scale(1.05);*/
     transform: scale(1.05);
@@ -345,7 +376,7 @@ footer h1{
     width: 90px;
     text-align: center;
     display: block;
-     margin-top: 10px; 
+     margin-top: 22px; 
     margin-left: auto;
     margin-right: auto;
     border-radius: 50%;
@@ -356,4 +387,7 @@ footer h1{
   -o-transition: all .5s ease-out;
   transition: all .5s ease-out;
 /*    overflow: visible;*/
+}
+#circle-logo:hover {
+    transform: scale(1.1);
 }
