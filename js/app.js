@@ -82,12 +82,14 @@ oneStarApp.controller("MainController",function($scope,$http){
     
     /////////// TODO: move this to core-graphic.js ///////////
     $scope.cardClick = function($index){
-        $scope.selectedIndex = $index;
-        setTimeout(scrollToCards, 200);
-        function scrollToCards(){
-            $('body').animate({
-                scrollTop: $(".card-selected").offset().top - 40
-            }, 800);
+        if($scope.selectedIndex != $index){ // duplicate
+            $scope.selectedIndex = $index;
+            setTimeout(scrollToCards, 200);
+            function scrollToCards(){
+                $('body').animate({
+                    scrollTop: $(".card-selected").offset().top - 40
+                }, 800);
+            }
         }
     }
     /////////// TODO: move this to core-graphic.js ///////////
