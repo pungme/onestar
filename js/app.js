@@ -1,23 +1,9 @@
 Parse.initialize("IqCqoOaKylK6hSZbgN4PS35UIcoHbc32vt5cLXjW", "PABcZoVcVUt5aPQyC3Z2re6fOd9sakjJWSozoB7G"); // initial parse
-var oneStarApp = angular.module("oneStarApp",['ngRoute']);
+var oneStarApp = angular.module("oneStarApp",['ngRoute','ngAnimate']);
 
 oneStarApp.config(function($httpProvider){
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 });
-
-//oneStarApp.directive('scrollTo', function() {
-//    return {
-//        restrict: 'A',
-//        link: function(scope, element, attrs) {
-//             scope.$watch('selectedIndex', function(newVal, oldVal) {
-//                 if (newVal && newVal !== oldVal) {
-////                     $('main').scrollTop(element.find('.card').eq(newVal).position().top)                     
-//                 }                 
-//            });
-//        }
-//    };
-//});
-
 
 oneStarApp.controller("MainController",function($scope,$http){
     
@@ -27,13 +13,7 @@ oneStarApp.controller("MainController",function($scope,$http){
     $scope.reviewData = {};
     $scope.isLoaded = false;
     $scope.selectedIndex = -1;
-    
-    /////////// TODO: move this to core-graphic.js ///////////
-//    $scope.cardClick = function($index){
-//        $scope.selectedIndex = $index;
-////        console.log("here");
-////        $(this).closest('.card').css('height', '600px');
-//    }
+
     $scope.getNearbyPlacesFromFacebook = function(){
           $http({
             method: 'POST', 
@@ -99,8 +79,8 @@ oneStarApp.controller("MainController",function($scope,$http){
         $('#circle-logo ').css('width', '100px').css('height','100px');
         $('#star-logo').css('width', '80px').css('margin-top','9px');
     }
-    /////////// TODO: move this to core-graphic.js ///////////
     
+    /////////// TODO: move this to core-graphic.js ///////////
     $scope.cardClick = function($index){
         $scope.selectedIndex = $index;
         setTimeout(scrollToCards, 200);
@@ -110,7 +90,8 @@ oneStarApp.controller("MainController",function($scope,$http){
             }, 800);
         }
     }
-        
+    /////////// TODO: move this to core-graphic.js ///////////
+    
     $scope.loadReviewFromParse = function(lat,lon){
         
         var Reviews = Parse.Object.extend("Reviews");

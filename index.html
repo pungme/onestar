@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular-animate.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular-route.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>    
 <script src="js/lib/realshadow-min.js"></script>    
@@ -61,13 +62,13 @@
                   </span>
               </h1>
               
-              <h1 ng-if="selectedIndex != $index">
+              <h1 ng-show="selectedIndex != $index">
                   {{data.get('review_text') | limitTo:400}}
               </h1> 
               
               <!--  In case it's very long, show the full text-->
               
-              <h1 ng-if="selectedIndex == $index">
+              <h1 ng-show="selectedIndex == $index" class="animate-if">
                   {{data.get('review_text')}}
               </h1> 
 
