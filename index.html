@@ -44,7 +44,7 @@
         
         <section class="card" 
                  ng-repeat="data in reviewData" 
-                 ng-class="{ 'card-selected': $index == selectedIndex }"
+                 ng-class="{'card-selected': $index == selectedIndex}"
                  ng-click="cardClick($index)"
                  >
             
@@ -60,9 +60,16 @@
                       {{data.get('place').get('zip')}}  
                   </span>
               </h1>
-              <h1>
+              
+              <h1 ng-if="selectedIndex != $index">
+                  {{data.get('review_text') | limitTo:400}}
+              </h1> 
+              
+              <!--  In case it's very long, show the full text-->
+              
+              <h1 ng-if="selectedIndex == $index">
                   {{data.get('review_text')}}
-              </h1>    
+              </h1> 
 
           </div>    
           

@@ -39,8 +39,32 @@ oneStarApp.controller("MainController",function($scope,$http){
             method: 'POST', 
             url: 'php/facebook.php'
           }).
-          success(function(data, status, headers, config) {
+          success(function(response, status, headers, config) {
+              var data = response.data;
               console.log(data);
+              for(var i= 0 ; i <data.length; i++){
+	              console.log(data[i].id + "," + data[i].category);
+	              
+              }
+          }).
+          error(function(data, status, headers, config) {
+              console.log("AJAX Error.");
+          });
+          
+          $http({
+            method: 'POST', 
+            url: 'php/facebook_rating.php'
+          }).
+          success(function(response, status, headers, config) {
+          	console.log(response);
+/*
+              var data = response.data;
+              console.log(data);
+              for(var i= 0 ; i <data.length; i++){
+	              console.log(data[i].id + "," + data[i].category);
+	              
+              }
+*/
           }).
           error(function(data, status, headers, config) {
               console.log("AJAX Error.");
@@ -88,16 +112,19 @@ oneStarApp.controller("MainController",function($scope,$http){
     }
         
     $scope.loadReviewFromParse = function(lat,lon){
+        
         var Reviews = Parse.Object.extend("Reviews");
         var point = new Parse.GeoPoint({latitude: lat, longitude: lon});
         var query = new Parse.Query(Reviews);
         query.include("place");
         query.near("location", point);
         query.limit(20);
+        
 //      TODO : query and get the closet one first.
         query.find({
           success: function(results) {
               $scope.reviewData = results;
+              console.log($scope.reviewData[0].get("review_text").length);
               $scope.calculateDistance(lat,lon);
               $scope.isLoaded = true;
               $scope.$apply();
