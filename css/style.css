@@ -464,3 +464,13 @@ footer h1{
     opacity: 0;
   }
 }
+
+
+
+/*Google Map Api*/
+
+#map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+}

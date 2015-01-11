@@ -1,5 +1,5 @@
 Parse.initialize("IqCqoOaKylK6hSZbgN4PS35UIcoHbc32vt5cLXjW", "PABcZoVcVUt5aPQyC3Z2re6fOd9sakjJWSozoB7G"); // initial parse
-var oneStarApp = angular.module("oneStarApp",['ngRoute','ngAnimate']);
+var oneStarApp = angular.module("oneStarApp",['ngRoute','ngMap']);
 
 oneStarApp.config(function($httpProvider){
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
@@ -13,6 +13,13 @@ oneStarApp.controller("MainController",function($scope,$http){
     $scope.reviewData = {};
     $scope.isLoaded = false;
     $scope.selectedIndex = -1;
+    $scope.searchText = "";
+    
+    $scope.searchPlaces = function(keyEvent) {
+      if (keyEvent.which === 13){
+        console.log($scope.searchText);
+      } 
+    }
 
     $scope.getNearbyPlacesFromFacebook = function(){
           $http({
@@ -82,7 +89,7 @@ oneStarApp.controller("MainController",function($scope,$http){
     
     /////////// TODO: move this to core-graphic.js ///////////
     $scope.cardClick = function($index){
-        if($scope.selectedIndex != $index){ // duplicate
+        if($scope.selectedIndex != $index){ // check if click the same
             $scope.selectedIndex = $index;
             setTimeout(scrollToCards, 200);
             function scrollToCards(){
@@ -90,7 +97,10 @@ oneStarApp.controller("MainController",function($scope,$http){
                     scrollTop: $(".card-selected").offset().top - 40
                 }, 800);
             }
+            
+//            google.maps.event.addDomListener(window, 'load', initialize);
         }
+//         google.maps.event.addDomListener(window, 'load', initialize);
     }
     /////////// TODO: move this to core-graphic.js ///////////
     
@@ -107,7 +117,6 @@ oneStarApp.controller("MainController",function($scope,$http){
         query.find({
           success: function(results) {
               $scope.reviewData = results;
-              console.log($scope.reviewData[0].get("review_text").length);
               $scope.calculateDistance(lat,lon);
               $scope.isLoaded = true;
               $scope.$apply();
@@ -223,8 +232,6 @@ oneStarApp.controller("MainController",function($scope,$http){
         
     }
 });
-//FB.init();
-
 
 //function getLocation() {
 //    if (navigator.geolocation) {
