@@ -135,30 +135,11 @@ input:focus + header {
 /*    min-height: 246px;*/
 }
 .card-selected{
-/*
-          -webkit-transition: all .5s ease-out;
-  -moz-transition: all .5s ease-out;
-  -o-transition: all .5s ease-out;
-  transition: all .5s ease-out;
-*/
-/*
-    padding:1.5rem 1.5rem 1.5rem 1.5rem;
-  box-shadow:0 1px 2px #aaa;
-  background:white;
-  margin:0 1rem 1.5rem;
-  border-radius:3px;
-  user-select:none;
-  animation:fly-in-from-left .5s 1s ease both;
-  transform-origin:top left;
-  transform-origin:center 3rem;
-  transition:all .3s;
-    overflow: hidden;
-*/
-      transition:all .5s; 
+  transition:all .5s; 
   -webkit-transition:all .5s; 
   -moz-transition:all .5s; 
   -o-transition:all .5s; 
-    min-height: 750px;
+/*    min-height: 750px;*/
 }
 .card:hover { 
 /*    -webkit-transform: scale(1.05);*/
@@ -468,3 +449,7 @@ footer h1{
 
 
 /*Google Map Api*/
+
+#google-map {
+    padding-top: 20px;
+}
