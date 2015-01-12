@@ -91,16 +91,22 @@
             </h2>
           </div>
             
-            <map zoom="11" center="[40.74, -74.18]">
-              <marker position="[40.74, -74.18]" />
-<!--
-                    <info-window position="current-location" visible="true">
-                        <span>{{data.get('place').get('name')}}</span>
-                    </info-window>
--->
-<!--              <shape name="circle" radius="400" center="[40.74,-74.18]" radius="4000" />-->
-              <control name="overviewMap" opened="true" />
-            </map>
+<!--            <div ng-show="selectedIndex == $index">-->
+                <map zoom="11" 
+                     center='[{{data.get("place").get("location").latitude}}, 
+                             {{data.get("place").get("location").longitude}}]'>
+
+                  <marker position='[{{data.get("place").get("location").latitude}}, {{data.get("place").get("location").longitude}}]' />
+    <!--
+                        <info-window position="current-location" visible="true">
+                            <span>{{data.get('place').get('name')}}</span>
+                        </info-window>
+    -->
+    <!--              <shape name="circle" radius="400" center="[40.74,-74.18]" radius="4000" />-->
+                  <control name="overviewMap" opened="true" />
+                </map>
+<!--            </div>-->
+            
 <!--       <div id="map-canvas" ng-show="selectedIndex == $index">-->
 <!--           <div id="map-canvas">-->
 <!--           </div>-->
