@@ -97,12 +97,10 @@ oneStarApp.controller("MainController",function($scope,$http){
                     scrollTop: $(".card-selected").offset().top - 40
                 }, 800);
             }
-            
-//            google.maps.event.addDomListener(window, 'load', initialize);
         }
-//         google.maps.event.addDomListener(window, 'load', initialize);
     }
     /////////// TODO: move this to core-graphic.js ///////////
+    
     
     $scope.loadReviewFromParse = function(lat,lon){
         
