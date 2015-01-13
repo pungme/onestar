@@ -5,6 +5,20 @@ oneStarApp.config(function($httpProvider){
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 });
 
+oneStarApp.config(function($routeProvider, $locationProvider) {
+  $routeProvider
+  .when('/', {
+    templateUrl: 'partials/main.html',
+    controller : 'MainController' //this is the main controller
+  })
+  .when('/place', {
+    templateUrl: 'partials/place.html',
+    controller : 'PlaceController'  
+  })
+
+  
+});
+
 oneStarApp.controller("MainController",function($scope,$http){
     
     $scope.CLIENT_ID = "PHKKTXSG2M0I5CXJFKZKXQ4ALX3G3CO13YASIUEX3OPTEKWV";

@@ -1,0 +1,105 @@
+    
+    <main>
+        
+        <input placeholder="Search" 
+               autocomplete="on" 
+               ng-focus="searchFocus()" 
+               ng-blur="searchBlur()"
+               ng-model="searchText"
+               ng-keypress="searchPlaces($event)"/>
+        
+<!--        <header></header>-->
+<!--        <button ng-click="facebookLogin()">Facebook Login</button>-->
+        <section class="card" ng-show="!isLoaded">
+            <h1>Loading ..</h1>
+            <h2>For better experiences, please allow location access. We will never store your location.</h2>
+        </section>
+        
+        <section class="card" 
+                 ng-repeat="data in reviewData" 
+                 ng-class="{'card-selected': $index == selectedIndex}"
+                 ng-click="cardClick($index)"
+                 >
+            
+          <div class="image-placeholder" ng-if='data.get("place").get("image_url")'>
+            <img ng-src='{{data.get("place").get("image_url")}}'> 
+          </div>
+          <div>
+              <h1 style="margin-top: 5px;">
+                  <strong>{{data.get('place').get('name')}} </strong>
+                  <span> 
+                      {{data.get('place').get('city')}}  
+                      {{data.get('place').get('street')}} 
+                      {{data.get('place').get('zip')}}  
+                  </span>
+              </h1>
+              
+              <h1 ng-show="selectedIndex != $index">
+                  {{data.get('review_text') | limitTo:400}}
+              </h1> 
+              
+              <!--  In case it's very long, show the full text-->
+              
+              <h1 ng-show="selectedIndex == $index" class="animate-if">
+                  {{data.get('review_text')}}
+              </h1> 
+
+          </div>    
+          
+          <div ng-if="data.distance">
+            <h2>
+                {{data.distance}} km away
+            </h2>
+          </div>
+            
+            <div id="google-map">
+                <map zoom="15"
+                     ng-if="selectedIndex == $index" 
+                     style="width:300px;height:300px"
+                     scrollwheel="false"
+                     center='[{{data.get("place").get("location").latitude}}, 
+                             {{data.get("place").get("location").longitude}}]'>
+
+                  <marker position='[{{data.get("place").get("location").latitude}}, {{data.get("place").get("location").longitude}}]' />
+    <!--
+                        <info-window position="current-location" visible="true">
+                            <span>{{data.get('place').get('name')}}</span>
+                        </info-window>
+    -->
+    <!--              <shape name="circle" radius="400" center="[40.74,-74.18]" radius="4000" />-->
+<!--                  <control name="overviewMap" opened="true" />-->
+                </map>
+            </div>
+            
+<!--       <div id="map-canvas" ng-show="selectedIndex == $index">-->
+<!--           <div id="map-canvas">-->
+<!--           </div>-->
+            
+        </section>
+        
+    </main>
+
+        <footer>
+            <center><h1>created by <a href="http://www.twitter.com/pungme" target="_blank">@pungme</a></h1></center>
+            <center><h1><a href="manifesto.html" target="_blank">read manifesto</a></h1></center>
+        </footer>
+    
+<!--    {{fourSqData}}-->
+<!--<div ng-view></div>-->
+<!--
+<script type="text/javascript">
+
+function initialize() {
+    var latlng = new google.maps.LatLng(-34.397, 150.644);
+    var myOptions = {
+        zoom: 8,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("map-canvas"),
+            myOptions);
+}
+google.maps.event.addDomListener(window, "load", initialize);
+
+</script>
+-->
