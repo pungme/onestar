@@ -26,7 +26,11 @@
           </div>
           <div>
               <h1 style="margin-top: 5px;">
-                  <strong>{{data.get('place').get('name')}} </strong>
+                  <strong>
+                      <a href='#place?id={{data.get("place").id}}'>
+                          {{data.get('place').get('name')}}
+                      </a> 
+                  </strong>
                   <span> 
                       {{data.get('place').get('city')}}  
                       {{data.get('place').get('street')}} 
