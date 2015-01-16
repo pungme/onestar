@@ -17,8 +17,9 @@
           <div>
               <h1 style="margin-top: 5px;">
                   <strong>
+                      <a>
                           {{place.get('name')}}
-
+                      </a>
                   </strong>
                   <span> 
                       {{place.get('city')}}  
@@ -27,15 +28,13 @@
                   </span>
               </h1>
               
-              <h1 ng-show="selectedIndex != $index">
+              <h1 >
 <!--                  {{data.get('review_text') | limitTo:400}}-->
+<!--                  TODO: put the most liked review-->
               </h1> 
               
               <!--  In case it's very long, show the full text-->
-              
-              <h1 ng-show="selectedIndex == $index" class="animate-if">
-<!--                  {{data.get('review_text')}}-->
-              </h1> 
+            
 
           </div>    
           

@@ -21,8 +21,8 @@ oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locatio
           success: function(object) {
               console.log(object);
               $scope.place = object;
-              $scope.calculateDistance($scope.userLocation.lat,$scope.userLocation.lon);
               $scope.$apply();
+              $scope.calculateDistance($scope.userLocation.lat,$scope.userLocation.lon);
             // Successfully retrieved the object.
           },
           error: function(error) {
