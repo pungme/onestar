@@ -5,6 +5,10 @@ oneStarApp.config(function($httpProvider){
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 });
 
+//oneStarApp.config(function($locationProvider) {
+//    $locationProvider.html5Mode(true);
+//});
+
 oneStarApp.config(function($routeProvider, $locationProvider) {
   $routeProvider
   .when('/', {

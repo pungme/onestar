@@ -1,5 +1,5 @@
-oneStarApp.controller("MainController",function($scope,$http){
-    
+oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',function($scope,$http,locationService){
+    console.log("main controller loaded");
     $scope.CLIENT_ID = "PHKKTXSG2M0I5CXJFKZKXQ4ALX3G3CO13YASIUEX3OPTEKWV";
     $scope.CLIENT_SECRET = "RQF2NDLN3ARNLQ3LDSAL2RK5WYTL20E4QW2QFNXBHLLY5IQT";
     $scope.GOOGLE_API_KEY = "AIzaSyAJxIsvGYFXhFHOusqY2r2_jMlyK0TzAnc";
@@ -7,7 +7,7 @@ oneStarApp.controller("MainController",function($scope,$http){
     $scope.isLoaded = false;
     $scope.selectedIndex = -1;
     $scope.searchText = "";
-    
+    $scope.locationService = locationService;  
     $scope.searchPlaces = function(keyEvent) {
       if (keyEvent.which === 13){
         console.log($scope.searchText);
@@ -135,11 +135,13 @@ oneStarApp.controller("MainController",function($scope,$http){
     
     $scope.getLocation({
             success:function(userPosition){
+              $scope.locationService.setLocation(userPosition.coords.latitude,userPosition.coords.longitude);
               $scope.loadReviewFromParse(userPosition.coords.latitude,userPosition.coords.longitude);
             },
             fail:function(){
                 console.log("User Denied.");
                 $.get("http://ipinfo.io", function(response) { // get the current city
+                     $scope.locationService.setLocation(parseFloat(response.loc.split(",")[0]),parseFloat(response.loc.split(",")[1]));
                      $scope.loadReviewFromParse(parseFloat(response.loc.split(",")[0]),parseFloat(response.loc.split(",")[1]))
                 }, "jsonp");
                 //TODO: get from ipinfo.io
@@ -154,8 +156,6 @@ oneStarApp.controller("MainController",function($scope,$http){
             var distance = getDistance(lat,lon, location.latitude, location.longitude, "K");
             $scope.reviewData[i].distance = Math.round(distance * 10) / 10;
         }
-//        console.log($scope.reviewData);
-
     }
     
     
@@ -222,7 +222,7 @@ oneStarApp.controller("MainController",function($scope,$http){
       });
         
     }
-});
+}]);
 
 //function getLocation() {
 //    if (navigator.geolocation) {
