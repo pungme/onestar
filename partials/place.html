@@ -43,12 +43,13 @@
                 {{place.distance}} km away
             </h2>
           </div>
-            
+            {{place.get("location").latitude}}, 
+                             {{place.get("location").longitude}}
             <div id="google-map">
                 <map zoom="15"
                      scrollwheel="false"
                      center='[{{place.get("location").latitude}}, 
-                             {{place.get("place").get("location").longitude}}]'>
+                             {{place.get("location").longitude}}]'>
 
                   <marker position='[{{place.get("location").latitude}}, {{place.get("location").longitude}}]' />
     <!--
