@@ -25,10 +25,13 @@
                       {{place.get('city')}}  
                       {{place.get('street')}} 
                       {{place.get('zip')}}  
+                      , 
+                      {{place.distance}} km away
                   </span>
               </h1>
               
-              <h1 >
+              <h1>
+                  {{place.about  | limitTo:400}}
 <!--                  {{data.get('review_text') | limitTo:400}}-->
 <!--                  TODO: put the most liked review-->
               </h1> 
@@ -38,13 +41,13 @@
 
           </div>    
           
+<!--
           <div ng-if="place.distance">
             <h2>
                 {{place.distance}} km away
             </h2>
           </div>
-            {{place.get("location").latitude}}, 
-                             {{place.get("location").longitude}}
+-->
             <div id="google-map">
                 <map zoom="15"
                      scrollwheel="false"

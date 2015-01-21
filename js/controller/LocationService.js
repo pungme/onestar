@@ -5,6 +5,7 @@ oneStarApp.service("locationService", function () {
 
     return {
         getLocation: function () {
+            
             return this.location;
         },
         setLocation: function (lat,lon) {

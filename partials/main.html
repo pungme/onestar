@@ -27,7 +27,8 @@
           <div>
               <h1 style="margin-top: 5px;">
                   <strong>
-                      <a href='#place?objectId={{data.get("place").id}}'>
+<!--                      <a ng-click='onPlaceNameClick(data.get("place").id)'>-->
+                      <a href='#place?objectId={{data.get("place").id}}' ng-click='onPlaceNameClick(data.get("place").id)'>
                           {{data.get('place').get('name')}}
                       </a> 
                   </strong>
@@ -35,6 +36,8 @@
                       {{data.get('place').get('city')}}  
                       {{data.get('place').get('street')}} 
                       {{data.get('place').get('zip')}}  
+                      , 
+                      {{data.distance}} km away
                   </span>
               </h1>
               
@@ -50,15 +53,22 @@
 
           </div>    
           
-          <div ng-if="data.distance">
+<!--
+          <div id="place-distance" ng-if="data.distance">
             <h2>
                 {{data.distance}} km away
             </h2>
           </div>
             
-            <div id="google-map">
+-->
+            <div id="place-reviewer">
+                <h2> reviewed by {{data.get('reviewer').get('facebook_name')}} </h2>
+            </div>
+            
+            <div id="google-map" 
+                 ng-if="selectedIndex == $index">
+                
                 <map zoom="15"
-                     ng-if="selectedIndex == $index" 
                      style="width:300px;height:300px"
                      scrollwheel="false"
                      center='[{{data.get("place").get("location").latitude}}, 

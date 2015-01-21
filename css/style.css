@@ -213,7 +213,8 @@ h1 {
     font-size:  25px;
 /*    cursor: pointer;*/
 /*  font-size:1.5rem;*/
-  font-weight:200;
+    margin-bottom: 0px;
+    font-weight:200;
 }
 h1 span{
     font-size: 15px;
@@ -233,7 +234,7 @@ strong a:hover{
 
 h2 {
   font-size:.9rem;
-  line-height:2.5;
+  line-height:1.5;
   color:gray;
   font-weight:400;
 }
@@ -458,4 +459,12 @@ footer h1{
 #google-map {
     padding-top: 20px;
     clear: both;
+}
+
+#place-distance {
+    float: left;
+}
+
+#place-reviewer {
+    float: right;
 }

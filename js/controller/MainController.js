@@ -14,6 +14,23 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
       } 
     }
 
+    $scope.onPlaceNameClick =function(object_id){
+        console.log(object_id);
+        Parse.FacebookUtils.logIn(null, {
+          success: function(user) {
+            console.log(user);
+            if (!user.existed()) {
+              console.log("User signed up and logged in through Facebook!");
+            } else {
+              console.log("User logged in through Facebook!");
+            }
+          },
+          error: function(user, error) {
+            console.log("User cancelled the Facebook login or did not fully authorize.");
+          }
+        });
+    }
+    
     $scope.getNearbyPlacesFromFacebook = function(){
           $http({
             method: 'POST', 
@@ -101,6 +118,7 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
         var point = new Parse.GeoPoint({latitude: lat, longitude: lon});
         var query = new Parse.Query(Reviews);
         query.include("place");
+        query.include("reviewer");
         query.near("location", point);
         query.limit(20);
         

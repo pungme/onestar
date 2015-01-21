@@ -19,6 +19,4 @@ oneStarApp.config(function($routeProvider, $locationProvider) {
     templateUrl: 'partials/place.html',
     controller : 'PlaceController'  
   })
-
-  
 });

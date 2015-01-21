@@ -19,10 +19,12 @@ oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locatio
 
         query.first({
           success: function(object) {
-              console.log(object);
               $scope.place = object;
               $scope.$apply();
-              $scope.calculateDistance($scope.userLocation.lat,$scope.userLocation.lon);
+              $scope.getPlaceDescription(object.get("place_id"));
+              if($scope.userLocation){
+                $scope.calculateDistance($scope.userLocation.lat,$scope.userLocation.lon);
+              }
             // Successfully retrieved the object.
           },
           error: function(error) {
@@ -31,6 +33,65 @@ oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locatio
         });
     }
     $scope.loadPlaceFromParse();
+
+    $scope.getPlaceDescription = function(place_id){
+        //This from facebook login.
+        var userAuth = Parse.User.current().get('authData')['facebook'];
+        FB.api(
+            "/"+place_id,
+            function (response) {
+              if (response && !response.error) {
+                  console.log(response);
+                  if(response.about){
+                    $scope.place.about = response.about;
+                  }else {
+                    $scope.place.about = response.description;
+                  }
+                  $scope.$apply();
+                /* handle the result */
+              }
+            },{access_token : userAuth.access_token});
+//          $http({
+//            method: 'POST', 
+//            url: 'https://graph.facebook.com/' + place_id
+//          }).
+//          success(function(data, status, headers, config) {
+//              console.log(data);
+//          }).
+//          error(function(data, status, headers, config) {
+//              console.log("AJAX Error.");
+//          });
+    }
+    
+        $scope.getLocation = function(callback){
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position){
+                callback.success(position);
+            },function(){
+                callback.fail();
+            });
+        } else {
+           callback.fail();
+           console.log("Geolocation is not supported by this browser.");
+        }
+    }
+    
+    $scope.getLocation({
+            success:function(userPosition){
+                
+//              $scope.locationService.setLocation(userPosition.coords.latitude,userPosition.coords.longitude);
+//              $scope.loadReviewFromParse(userPosition.coords.latitude,userPosition.coords.longitude);
+            },
+            fail:function(){
+                console.log("User Denied.");
+                $.get("http://ipinfo.io", function(response) { // get the current city
+//                     $scope.locationService.setLocation(parseFloat(response.loc.split(",")[0]),parseFloat(response.loc.split(",")[1]));
+//                     $scope.loadReviewFromParse(parseFloat(response.loc.split(",")[0]),parseFloat(response.loc.split(",")[1]))
+                }, "jsonp");
+                //TODO: get from ipinfo.io
+            }
+    });
+                                      
     //pass the current location
     $scope.calculateDistance = function(lat,lon){
         var location = $scope.place.get("location");
