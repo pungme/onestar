@@ -37,6 +37,7 @@ oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locatio
     $scope.getPlaceDescription = function(place_id){
         //This from facebook login.
         var userAuth = Parse.User.current().get('authData')['facebook'];
+        console.log(userAuth);
         FB.api(
             "/"+place_id,
             function (response) {
@@ -63,7 +64,7 @@ oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locatio
 //          });
     }
     
-        $scope.getLocation = function(callback){
+    $scope.getLocation = function(callback){
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position){
                 callback.success(position);
@@ -78,15 +79,12 @@ oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locatio
     
     $scope.getLocation({
             success:function(userPosition){
-                
-//              $scope.locationService.setLocation(userPosition.coords.latitude,userPosition.coords.longitude);
-//              $scope.loadReviewFromParse(userPosition.coords.latitude,userPosition.coords.longitude);
+                $scope.calculateDistance(userPosition.coords.latitude,userPosition.coords.longitude);
             },
             fail:function(){
-                console.log("User Denied.");
                 $.get("http://ipinfo.io", function(response) { // get the current city
-//                     $scope.locationService.setLocation(parseFloat(response.loc.split(",")[0]),parseFloat(response.loc.split(",")[1]));
-//                     $scope.loadReviewFromParse(parseFloat(response.loc.split(",")[0]),parseFloat(response.loc.split(",")[1]))
+                $scope.calculateDistance(parseFloat(response.loc.split(",")[0]),parseFloat(response.loc.split(",")[1]));    
+
                 }, "jsonp");
                 //TODO: get from ipinfo.io
             }

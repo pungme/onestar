@@ -1,3 +1,4 @@
+
 oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',function($scope,$http,locationService){
     console.log("main controller loaded");
     $scope.CLIENT_ID = "PHKKTXSG2M0I5CXJFKZKXQ4ALX3G3CO13YASIUEX3OPTEKWV";
@@ -14,21 +15,34 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
       } 
     }
 
+    $scope.askForFacebookLogin = function(){
+        //show the login card ...
+//        $scope.reviewData.unshift([]);
+    }
+    
     $scope.onPlaceNameClick =function(object_id){
-        console.log(object_id);
-        Parse.FacebookUtils.logIn(null, {
-          success: function(user) {
-            console.log(user);
-            if (!user.existed()) {
-              console.log("User signed up and logged in through Facebook!");
-            } else {
-              console.log("User logged in through Facebook!");
-            }
-          },
-          error: function(user, error) {
-            console.log("User cancelled the Facebook login or did not fully authorize.");
-          }
-        });
+        $scope.askForFacebookLogin();
+        //ask for facebook login //
+//        if(Parse.User.current()){
+//            window.location = '#place?objectId=' + object_id;
+//        }else{
+//            Parse.FacebookUtils.logIn(null, {
+//              success: function(user) {
+//
+//                if (!user.existed()) {
+//                  window.location = '#place?objectId=' + object_id;
+//                  console.log("User signed up and logged in through Facebook!");
+//                } else {
+//                  window.location = '#place?objectId=' + object_id;
+//                  console.log("User logged in through Facebook!");
+//                }
+//              },
+//              error: function(user, error) {
+////                window.location = '#place?objectId=' + object_id;
+//                console.log("User cancelled the Facebook login or did not fully authorize.");
+//              }
+//            });
+//        }
     }
     
     $scope.getNearbyPlacesFromFacebook = function(){
@@ -109,6 +123,10 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
             }
         }
     }
+    $scope.moveToThisCard = function($index){
+        //TODO:
+//        $scope.selectedIndex = $index;
+    }
     /////////// TODO: move this to core-graphic.js ///////////
     
     
@@ -176,11 +194,9 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
         }
     }
     
-    
-    
-    
-    
+//////////////////////////////////////////////////////////////////////////////////////////////////////  
 ////////////////////////// get data from third party tryout, nothing work sofar. /////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 //  Yelp api desn't support sort by rating !!
     $scope.yelpData = {};
     
@@ -231,7 +247,6 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
               "&ll=" +ll
       }).
       success(function(data, status, headers, config) {
-          console.log(data);
           $scope.fourSqData = data;
 //          $scope.yelpData = data;
       }).

@@ -1,9 +1,9 @@
 Parse.initialize("IqCqoOaKylK6hSZbgN4PS35UIcoHbc32vt5cLXjW", "PABcZoVcVUt5aPQyC3Z2re6fOd9sakjJWSozoB7G"); // initial parse
 var oneStarApp = angular.module("oneStarApp",['ngRoute','ngMap']);
 
-oneStarApp.config(function($httpProvider){
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
-});
+//oneStarApp.config(function($httpProvider){
+//    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+//});
 
 //oneStarApp.config(function($locationProvider) {
 //    $locationProvider.html5Mode(true);

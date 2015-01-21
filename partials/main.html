@@ -18,9 +18,9 @@
         <section class="card" 
                  ng-repeat="data in reviewData" 
                  ng-class="{'card-selected': $index == selectedIndex}"
-                 ng-click="cardClick($index)"
+                 ng-click="moveToThisCard($index)"
                  >
-            
+<!--            ng-click="cardClick($index)"-->
           <div class="image-placeholder" ng-if='data.get("place").get("image_url")'>
             <img ng-src='{{data.get("place").get("image_url")}}'> 
           </div>
@@ -28,7 +28,7 @@
               <h1 style="margin-top: 5px;">
                   <strong>
 <!--                      <a ng-click='onPlaceNameClick(data.get("place").id)'>-->
-                      <a href='#place?objectId={{data.get("place").id}}' ng-click='onPlaceNameClick(data.get("place").id)'>
+                      <a ng-click='onPlaceNameClick(data.get("place").id)'>
                           {{data.get('place').get('name')}}
                       </a> 
                   </strong>
@@ -45,6 +45,12 @@
                   {{data.get('review_text') | limitTo:400}}
               </h1> 
               
+<!--
+              <span ng-show="selectedIndex != $index" id="more-button">
+                  more ... 
+              </span>
+-->
+              
               <!--  In case it's very long, show the full text-->
               
               <h1 ng-show="selectedIndex == $index" class="animate-if">
@@ -52,19 +58,19 @@
               </h1> 
 
           </div>    
-          
-<!--
-          <div id="place-distance" ng-if="data.distance">
-            <h2>
-                {{data.distance}} km away
-            </h2>
-          </div>
-            
--->
+
             <div id="place-reviewer">
                 <h2> reviewed by {{data.get('reviewer').get('facebook_name')}} </h2>
             </div>
             
+<!--
+            <div ng-show="selectedIndex != $index" id="more-button" ng-click="cardClick($index)">
+              <h2>  more ...</h2>
+           </div>
+-->
+           <span ng-show="selectedIndex != $index" id="more-button" ng-click="cardClick($index)">
+                more ...
+           </span>
             <div id="google-map" 
                  ng-if="selectedIndex == $index">
                 

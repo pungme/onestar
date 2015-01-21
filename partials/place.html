@@ -25,8 +25,8 @@
                       {{place.get('city')}}  
                       {{place.get('street')}} 
                       {{place.get('zip')}}  
-                      , 
-                      {{place.distance}} km away
+                      
+                      <span ng-show="place.distance">{{place.distance}} km away</span>
                   </span>
               </h1>
               
