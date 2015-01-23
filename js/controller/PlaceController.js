@@ -33,7 +33,7 @@ oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locatio
         query.first({
           success: function(object) {
               $scope.place = object;
-              
+              $scope.$apply();
               $scope.getPlaceDescription(object.get("place_id"));
               
               if($scope.userLocation){
@@ -41,7 +41,7 @@ oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locatio
               }
               
               $scope.loadReviewsOfPlace($scope.place);
-              $scope.$apply();
+//              $scope.$apply();
             // Successfully retrieved the object.
           },
           error: function(error) {
@@ -52,6 +52,7 @@ oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locatio
     $scope.loadPlaceFromParse();
 
     $scope.getPlaceDescription = function(place_id){
+        //giving up on facebook 
         //This from facebook login.
 //        var userAuth = Parse.User.current().get('authData')['facebook'];
 //        FB.api(
@@ -99,7 +100,7 @@ oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locatio
             },
             fail:function(){
                 $.get("http://ipinfo.io", function(response) { // get the current city
-                $scope.calculateDistance(parseFloat(response.loc.split(",")[0]),parseFloat(response.loc.split(",")[1]));    
+                    $scope.calculateDistance(parseFloat(response.loc.split(",")[0]),parseFloat(response.loc.split(",")[1]));    
 
                 }, "jsonp");
                 //TODO: get from ipinfo.io
