@@ -31,7 +31,7 @@
               </h1>
               
               <h1>
-                  {{place.about  | limitTo:400}}
+                  {{place.get('description')  | limitTo:400}}
 <!--                  {{data.get('review_text') | limitTo:400}}-->
 <!--                  TODO: put the most liked review-->
               </h1> 

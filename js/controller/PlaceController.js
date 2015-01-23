@@ -33,13 +33,15 @@ oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locatio
         query.first({
           success: function(object) {
               $scope.place = object;
-              $scope.$apply();
+              
               $scope.getPlaceDescription(object.get("place_id"));
+              
               if($scope.userLocation){
                 $scope.calculateDistance($scope.userLocation.lat,$scope.userLocation.lon);
               }
               
               $scope.loadReviewsOfPlace($scope.place);
+              $scope.$apply();
             // Successfully retrieved the object.
           },
           error: function(error) {
@@ -51,21 +53,21 @@ oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locatio
 
     $scope.getPlaceDescription = function(place_id){
         //This from facebook login.
-        var userAuth = Parse.User.current().get('authData')['facebook'];
-        FB.api(
-            "/"+place_id,
-            function (response) {
-              if (response && !response.error) {
-                  console.log(response);
-                  if(response.about){
-                    $scope.place.about = response.about;
-                  }else {
-                    $scope.place.about = response.description;
-                  }
-                  $scope.$apply();
-                /* handle the result */
-              }
-            },{access_token : userAuth.access_token});
+//        var userAuth = Parse.User.current().get('authData')['facebook'];
+//        FB.api(
+//            "/"+place_id,
+//            function (response) {
+//              if (response && !response.error) {
+//                  console.log(response);
+//                  if(response.about){
+//                    $scope.place.about = response.about;
+//                  }else {
+//                    $scope.place.about = response.description;
+//                  }
+//                  $scope.$apply();
+//                /* handle the result */
+//              }
+//            },{access_token : userAuth.access_token});
 //          $http({
 //            method: 'POST', 
 //            url: 'https://graph.facebook.com/' + place_id
