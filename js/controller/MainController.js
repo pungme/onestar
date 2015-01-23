@@ -14,21 +14,28 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
         console.log($scope.searchText);
       } 
     }
-
     $scope.askForFacebookLogin = function(){
         //show the login card ...
 //        $scope.reviewData.unshift([]);
     }
-    
     $scope.onPlaceNameClick =function(object_id){
-        $scope.askForFacebookLogin();
+        window.location = '#place?objectId=' + object_id;
+        //forget about facebook login just for now .... 
+//        $scope.askForFacebookLogin();
         //ask for facebook login //
 //        if(Parse.User.current()){
 //            window.location = '#place?objectId=' + object_id;
 //        }else{
-//            Parse.FacebookUtils.logIn(null, {
+//        FB.logout();
+//        var userAuth = Parse.User.current().get('authData')['facebook'];
+//        console.log(userAuth);
+////        console.log(FB.getAuthResponse());
+//            Parse.FacebookUtils.logIn({
+//                "id": userAuth.id,
+//                "access_token": userAuth.access_token,
+//                "expiration_date": userAuth.expiration_date
+//            }, {
 //              success: function(user) {
-//
 //                if (!user.existed()) {
 //                  window.location = '#place?objectId=' + object_id;
 //                  console.log("User signed up and logged in through Facebook!");

@@ -11,6 +11,19 @@ oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locatio
 
     //TODO: get place from objectId and get all review of this place.
     
+    $scope.loadReviewsOfPlace = function(place){
+        var Reviews = Parse.Object.extend("Reviews");
+        var query = new Parse.Query(Reviews);
+        query.equalTo("place", place);
+        query.find({
+          success: function(objects) {
+              console.log(objects);
+            // comments now contains the comments for myPost
+          }
+        });
+        
+    }
+    
     $scope.loadPlaceFromParse = function(){
         
         var Places = Parse.Object.extend("Places");
@@ -25,6 +38,8 @@ oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locatio
               if($scope.userLocation){
                 $scope.calculateDistance($scope.userLocation.lat,$scope.userLocation.lon);
               }
+              
+              $scope.loadReviewsOfPlace($scope.place);
             // Successfully retrieved the object.
           },
           error: function(error) {
@@ -37,7 +52,6 @@ oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locatio
     $scope.getPlaceDescription = function(place_id){
         //This from facebook login.
         var userAuth = Parse.User.current().get('authData')['facebook'];
-        console.log(userAuth);
         FB.api(
             "/"+place_id,
             function (response) {
