@@ -5,6 +5,8 @@ oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locatio
                                   function($scope,$http,$location,locationService){
     
     $scope.place = {};
+    $scope.reviews = {};
+                                      
     $scope.objectId = $location.search().objectId;
     $scope.locationService = locationService;
     $scope.userLocation = $scope.locationService.getLocation();
@@ -15,9 +17,10 @@ oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locatio
         var Reviews = Parse.Object.extend("Reviews");
         var query = new Parse.Query(Reviews);
         query.equalTo("place", place);
+        query.include("reviewer");
         query.find({
           success: function(objects) {
-              console.log(objects);
+              $scope.reviews = objects;
               $scope.$apply();
             // comments now contains the comments for myPost
           }

@@ -6,10 +6,9 @@
                ng-focus="searchFocus()" 
                ng-blur="searchBlur()"
                ng-model="searchText"
-               ng-keypress="searchPlaces($event)"/>
+               ng-keypress="searchPlaces($event)"
+               style="visibility:hidden;"/>
         
-<!--        <header></header>-->
-<!--        <button ng-click="facebookLogin()">Facebook Login</button>-->
         <section class="card">
           <div class="image-placeholder" ng-if='place.get("image_url")'>
             <img ng-src='{{place.get("image_url")}}'> 
@@ -51,6 +50,7 @@
             <div id="google-map">
                 <map zoom="15"
                      scrollwheel="false"
+                     style="height:250px"
                      center='[{{place.get("location").latitude}}, 
                              {{place.get("location").longitude}}]'>
 
@@ -66,23 +66,42 @@
             </div>
         </section>
         
+<!--START REVIEWS PART -->
+        
+        <section class="card"
+                 ng-repeat="data in reviews" >
+
+          <div>
+              <h1 style="margin-top: 5px;">
+              </h1>
+              
+              <h1>
+                  {{data.get('review_text')}}
+                  
+              </h1> 
+
+          </div>    
+         <div id="place-reviewer">
+                <h2> reviewed by {{data.get('reviewer').get('facebook_name')}} </h2>
+            </div>
+
+        </section>
+<!--END REVIEWS PART -->
+        
+<!-- USER review part -->
+        <section class="card">
+
+          <div>
+              <h1 style="margin-top: 5px;">
+              </h1>
+              
+              <h1>
+                  Want to give this place one star? tell us why.((( some complain/discourage text here ... (TBD))))
+              </h1> 
+              
+              <h2>We value authencity of the reviews. Please login to proceed</h2>
+          </div>    
+
+        </section>
+        
     </main>
-<!--    {{fourSqData}}-->
-<!--<div ng-view></div>-->
-<!--
-<script type="text/javascript">
-
-function initialize() {
-    var latlng = new google.maps.LatLng(-34.397, 150.644);
-    var myOptions = {
-        zoom: 8,
-        center: latlng,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    var map = new google.maps.Map(document.getElementById("map-canvas"),
-            myOptions);
-}
-google.maps.event.addDomListener(window, "load", initialize);
-
-</script>
--->
