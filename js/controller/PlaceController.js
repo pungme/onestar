@@ -18,6 +18,7 @@ oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locatio
         query.find({
           success: function(objects) {
               console.log(objects);
+              $scope.$apply();
             // comments now contains the comments for myPost
           }
         });
@@ -33,16 +34,14 @@ oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locatio
         query.first({
           success: function(object) {
               $scope.place = object;
-              $scope.$apply();
-              $scope.getPlaceDescription(object.get("place_id"));
+
+//              $scope.getPlaceDescription(object.get("place_id"));
               
               if($scope.userLocation){
                 $scope.calculateDistance($scope.userLocation.lat,$scope.userLocation.lon);
               }
               
               $scope.loadReviewsOfPlace($scope.place);
-//              $scope.$apply();
-            // Successfully retrieved the object.
           },
           error: function(error) {
             console.log("Error: " + error.code + " " + error.message);
@@ -109,9 +108,11 @@ oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locatio
                                       
     //pass the current location
     $scope.calculateDistance = function(lat,lon){
-        var location = $scope.place.get("location");
-        var distance = getDistance(lat,lon, location.latitude, location.longitude, "K");
-        $scope.place.distance = Math.round(distance * 10) / 10;
-        $scope.$apply();
+        if($scope.place != undefined){
+            var location = $scope.place.get("location");
+            var distance = getDistance(lat,lon, location.latitude, location.longitude, "K");
+            $scope.place.distance = Math.round(distance * 10) / 10;
+        }
+//        $scope.$apply();
     }
 }]);

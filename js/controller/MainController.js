@@ -88,7 +88,7 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
               console.log("AJAX Error.");
           });
     }
-    $scope.getNearbyPlacesFromFacebook();
+//    $scope.getNearbyPlacesFromFacebook();
     
     $scope.facebookLogin = function(){
         Parse.FacebookUtils.logIn(null, {
