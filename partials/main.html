@@ -78,7 +78,7 @@
                  ng-if="selectedIndex == $index">
                 
                 <map zoom="15"
-                     style="width:300px;height:300px"
+                     style="height:250px;"
                      scrollwheel="false"
                      center='[{{data.get("place").get("location").latitude}}, 
                              {{data.get("place").get("location").longitude}}]'>
@@ -87,10 +87,11 @@
                 </map>
             </div>
 
-            <dir-disqus ng-if="selectedIndex == $index"
+            <dir-disqus style="margin-top:10px;"
+                        ng-if="selectedIndex == $index"
                         disqus-shortname="onestar"
                         disqus-identifier="{{data.id}}"
-                        disqus-url="http://www.onestar.reviews? {{data.id}}">
+                        disqus-url="http://www.onestar.reviews?{{data.id}}">
             </dir-disqus>
             
             <!--

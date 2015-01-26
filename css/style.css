@@ -462,7 +462,9 @@ footer h1{
 
 #google-map {
     padding-top: 20px;
+    padding-bottom: 20px;
     clear: both;
+/*    float: left;*/
 }
 
 #place-distance {
@@ -470,8 +472,6 @@ footer h1{
 }
 
 #place-reviewer {
-    float: right;
-/*    position: absolute;*/
     float: right;
     bottom: 1em;
     right: 3em;
