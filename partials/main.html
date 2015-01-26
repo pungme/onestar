@@ -19,6 +19,7 @@
                  ng-repeat="data in reviewData" 
                  ng-class="{'card-selected': $index == selectedIndex}"
                  ng-click="moveToThisCard($index)"
+                 ng-mouseover="hoverInCard()"
                  >
 <!--            ng-click="cardClick($index)"-->
           <div class="image-placeholder" ng-if='data.get("place").get("image_url")'>
@@ -106,6 +107,12 @@
                         disqus-url="http://www.onestar.reviews?{{data.id}}">
             </dir-disqus>
             
+<!--
+            <span class="disqus-comment-count" 
+                  data-disqus-url="http://www.onestar.reviews?{{data.id}}"> 
+            </span>
+-->
+            
             <!--
 
             <div id="disqus_thread"
@@ -113,7 +120,7 @@
             </div>
 -->
             
-            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>       </noscript>
+
             
             
         </section>

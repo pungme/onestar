@@ -6,12 +6,24 @@ oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locatio
     
     $scope.place = {};
     $scope.reviews = {};
-                                      
+    $scope.selectedIndex = -1;                                 
     $scope.objectId = $location.search().objectId;
     $scope.locationService = locationService;
     $scope.userLocation = $scope.locationService.getLocation();
 
     //TODO: get place from objectId and get all review of this place.
+    $scope.cardClick = function($index){
+        if($scope.selectedIndex != $index){ // check if click the same
+            $scope.selectedIndex = $index;
+            setTimeout(scrollToCards, 200);
+            function scrollToCards(){
+                $('body').animate({
+                    scrollTop: $(".card-selected").offset().top - 40
+                }, 800);
+            }
+        }
+//        $scope.injectDisqusComment();
+    }
     
     $scope.loadReviewsOfPlace = function(place){
         var Reviews = Parse.Object.extend("Reviews");

@@ -527,3 +527,6 @@ footer h1{
 .expand-icon:hover .fa-expand{
     color: #6f6f6f;
 }
+#join-discussion {
+    cursor: pointer;
+}

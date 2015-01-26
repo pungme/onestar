@@ -131,6 +131,7 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
                 }, 800);
             }
         }
+//        $scope.injectDisqusComment();
     }
     $scope.moveToThisCard = function($index){
         //TODO:
@@ -156,6 +157,11 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
               $scope.calculateDistance(lat,lon);
               $scope.isLoaded = true;
               $scope.$apply();
+              
+              setTimeout(function() {
+                    $scope.injectDisqusComment();
+              }, 4000);
+//              $scope.injectDisqusComment();
           },
           error: function(error) {
             alert("Error: " + error.code + " " + error.message);

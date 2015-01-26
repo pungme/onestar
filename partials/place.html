@@ -30,23 +30,13 @@
               </h1>
               
               <h1>
-                  {{place.get('description')  | limitTo:400}}
+                  {{place.get('description')  | limitTo:500}}
 <!--                  {{data.get('review_text') | limitTo:400}}-->
 <!--                  TODO: put the most liked review-->
               </h1> 
               
               <!--  In case it's very long, show the full text-->
-            
-
           </div>    
-          
-<!--
-          <div ng-if="place.distance">
-            <h2>
-                {{place.distance}} km away
-            </h2>
-          </div>
--->
             <div id="google-map">
                 <map zoom="15"
                      scrollwheel="false"
@@ -55,13 +45,7 @@
                              {{place.get("location").longitude}}]'>
 
                   <marker position='[{{place.get("location").latitude}}, {{place.get("location").longitude}}]' />
-    <!--
-                        <info-window position="current-location" visible="true">
-                            <span>{{data.get('place').get('name')}}</span>
-                        </info-window>
-    -->
-    <!--              <shape name="circle" radius="400" center="[40.74,-74.18]" radius="4000" />-->
-<!--                  <control name="overviewMap" opened="true" />-->
+
                 </map>
             </div>
         </section>
@@ -69,7 +53,8 @@
 <!--START REVIEWS PART -->
         
         <section class="card"
-                 ng-repeat="data in reviews" >
+                 ng-repeat="data in reviews" 
+                 ng-class="{'card-selected': $index == selectedIndex}">
 
           <div>
               <h1 style="margin-top: 5px;">
@@ -85,6 +70,18 @@
                 <h2> reviewed by {{data.get('reviewer').get('facebook_name')}} </h2>
             </div>
 
+        <h2 ng-click="cardClick($index)" 
+            ng-if="selectedIndex != $index"
+            id="join-discussion">
+            Join discussion 
+        </h2>
+            
+        <dir-disqus style="margin-top:10px;"
+                    ng-if="selectedIndex == $index"
+                    disqus-shortname="onestar"
+                    disqus-identifier="{{data.id}}"
+                    disqus-url="http://www.onestar.reviews?{{data.id}}">
+        </dir-disqus>
         </section>
 <!--END REVIEWS PART -->
         
