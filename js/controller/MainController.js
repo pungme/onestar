@@ -9,11 +9,27 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
     $scope.selectedIndex = -1;
     $scope.searchText = "";
     $scope.locationService = locationService;  
+    
+    
     $scope.searchPlaces = function(keyEvent) {
       if (keyEvent.which === 13){
         console.log($scope.searchText);
       } 
     }
+    
+    //enable 3rd party disqus plugin 
+//    $scope.enableDisqus = function(){
+//        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+//        var disqus_shortname = 'onestar'; // required: replace example with your forum shortname
+//
+//        /* * * DON'T EDIT BELOW THIS LINE * * */
+//        (function() {
+//            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+//            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+//            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+//        })();
+//    }
+    
     $scope.askForFacebookLogin = function(){
         //show the login card ...
 //        $scope.reviewData.unshift([]);

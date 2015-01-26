@@ -71,6 +71,9 @@
            <span ng-show="selectedIndex != $index" id="more-button" ng-click="cardClick($index)">
                 more ...
            </span>
+            
+<!--            <div id="disqus_thread">Hello</div>-->
+            
             <div id="google-map" 
                  ng-if="selectedIndex == $index">
                 
@@ -83,6 +86,22 @@
                   <marker position='[{{data.get("place").get("location").latitude}}, {{data.get("place").get("location").longitude}}]' />
                 </map>
             </div>
+
+            <dir-disqus ng-if="selectedIndex == $index"
+                        disqus-shortname="onestar"
+                        disqus-identifier="{{data.id}}"
+                        disqus-url="http://www.onestar.reviews? {{data.id}}">
+            </dir-disqus>
+            
+            <!--
+
+            <div id="disqus_thread"
+                 style="float: left;margin-left: 20px;width: 70%;">
+            </div>
+-->
+            
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>       </noscript>
+            
             
         </section>
         

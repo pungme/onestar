@@ -1,5 +1,5 @@
 Parse.initialize("IqCqoOaKylK6hSZbgN4PS35UIcoHbc32vt5cLXjW", "PABcZoVcVUt5aPQyC3Z2re6fOd9sakjJWSozoB7G"); // initial parse
-var oneStarApp = angular.module("oneStarApp",['ngRoute','ngMap']);
+var oneStarApp = angular.module("oneStarApp",['ngRoute','ngMap','angularUtils.directives.dirDisqus']);
 
 //oneStarApp.config(function($httpProvider){
 //    delete $httpProvider.defaults.headers.common['X-Requested-With'];
