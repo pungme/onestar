@@ -62,36 +62,31 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
           success(function(response, status, headers, config) {
               var data = response.data;
               console.log(data);
-              for(var i= 0 ; i <data.length; i++){
-	              console.log(data[i].id + "," + data[i].category);
-	              
-              }
+//              for(var i= 0 ; i <data.length; i++){
+//	              console.log(data[i].id + "," + data[i].category);
+//	              
+//              }
           }).
           error(function(data, status, headers, config) {
               console.log("AJAX Error.");
           });
           
-          $http({
-            method: 'POST', 
-            url: 'php/facebook_rating.php'
-          }).
-          success(function(response, status, headers, config) {
-          	console.log(response);
-/*
-              var data = response.data;
-              console.log(data);
-              for(var i= 0 ; i <data.length; i++){
-	              console.log(data[i].id + "," + data[i].category);
-	              
-              }
-*/
-          }).
-          error(function(data, status, headers, config) {
-              console.log("AJAX Error.");
-          });
+//          $http({
+//            method: 'POST', 
+//            url: 'php/facebook_rating.php'
+//          }).
+//          success(function(response, status, headers, config) {
+//          	console.log(response);
+//
+//          }).
+//          error(function(data, status, headers, config) {
+//              console.log("AJAX Error.");
+//          });
     }
 //    $scope.getNearbyPlacesFromFacebook();
     
+    
+    /////////// STILL Struggling /////////// 
     $scope.facebookLogin = function(){
         Parse.FacebookUtils.logIn(null, {
           success: function(user) {
@@ -132,10 +127,6 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
             }
         }
 //        $scope.injectDisqusComment();
-    }
-    $scope.moveToThisCard = function($index){
-        //TODO:
-//        $scope.selectedIndex = $index;
     }
     /////////// TODO: move this to core-graphic.js ///////////
     
