@@ -17,22 +17,8 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
       } 
     }
     
-    //enable 3rd party disqus plugin 
-//    $scope.enableDisqus = function(){
-//        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-//        var disqus_shortname = 'onestar'; // required: replace example with your forum shortname
-//
-//        /* * * DON'T EDIT BELOW THIS LINE * * */
-//        (function() {
-//            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-//            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-//            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-//        })();
-//    }
-    
     $scope.askForFacebookLogin = function(){
-        //show the login card ...
-//        $scope.reviewData.unshift([]);
+        //TODO:
     }
     $scope.onPlaceNameClick =function(object_id){
         window.location = '#place?objectId=' + object_id;
@@ -279,16 +265,3 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
         
     }
 }]);
-
-//function getLocation() {
-//    if (navigator.geolocation) {
-//        navigator.geolocation.getCurrentPosition(showPosition);
-//    } else {
-//       console.log("Geolocation is not supported by this browser.");
-//    }
-//}
-//
-//function showPosition(position) {
-//    console.log(position);
-//}
-//getLocation();

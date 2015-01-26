@@ -24,6 +24,18 @@
           <div class="image-placeholder" ng-if='data.get("place").get("image_url")'>
             <img ng-src='{{data.get("place").get("image_url")}}'> 
           </div>
+            
+            
+            <div class="expand-icon" 
+                 ng-click="cardClick($index)"
+                 ng-show="selectedIndex != $index">
+               <i class="fa fa-expand"></i>
+<!--
+               <div class="showme">hai</div>
+               <div class="ok">ok</div>
+-->
+            </div>
+           
           <div>
               <h1 style="margin-top: 5px;">
                   <strong>
@@ -69,7 +81,7 @@
            </div>
 -->
            <span ng-show="selectedIndex != $index" id="more-button" ng-click="cardClick($index)">
-                more ...
+               see more ...
            </span>
             
 <!--            <div id="disqus_thread">Hello</div>-->
