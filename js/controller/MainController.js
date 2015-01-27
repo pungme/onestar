@@ -13,7 +13,7 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
     
     $scope.searchPlaces = function(keyEvent) {
       if (keyEvent.which === 13){
-        console.log($scope.searchText);
+          $scope.searchNearbyPlacesFromFacebook($scope.searchText);
       } 
     }
     
@@ -54,10 +54,14 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
 //        }
     }
     
-    $scope.getNearbyPlacesFromFacebook = function(){
+    $scope.searchNearbyPlacesFromFacebook = function(searchtext){
           $http({
             method: 'POST', 
-            url: 'php/facebook.php'
+            url: 'php/facebook_search.php',
+            data:{
+                location:'',
+                searchtext:searchtext
+            }
           }).
           success(function(response, status, headers, config) {
               var data = response.data;
