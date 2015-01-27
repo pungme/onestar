@@ -15,6 +15,32 @@
             <h2>For better experiences, please allow location access. We will never store your location.</h2>
         </section>
         
+        <!-- START SEARCH PART-->
+        <section class="card"
+                 ng-repeat="data in searchResults" 
+                 >
+            
+            <h1 style="margin-top: 5px;">
+                  <strong>
+<!--                      <a ng-click='onPlaceNameClick(data.get("place").id)'>-->
+                      <a ng-click='onPlaceNameClick(data.get("place").id)'>
+                          {{data.name}}
+                      </a> 
+                  </strong>
+                  <span> 
+                      {{data.location.city}}  
+                      {{data.location.street}} 
+                      {{data.location.zip}}  
+                      , 
+<!--                      {{data.distance}} km away-->
+                  </span>
+              </h1>
+
+        </section>
+        <!-- END SEARCH PART -->
+        
+        
+        
         <section class="card" 
                  ng-repeat="data in reviewData" 
                  ng-class="{'card-selected': $index == selectedIndex}"
