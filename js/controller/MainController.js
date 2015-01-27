@@ -1,16 +1,16 @@
 
 oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',function($scope,$http,locationService){
-    console.log("main controller loaded");
-    $scope.CLIENT_ID = "PHKKTXSG2M0I5CXJFKZKXQ4ALX3G3CO13YASIUEX3OPTEKWV";
-    $scope.CLIENT_SECRET = "RQF2NDLN3ARNLQ3LDSAL2RK5WYTL20E4QW2QFNXBHLLY5IQT";
-    $scope.GOOGLE_API_KEY = "AIzaSyAJxIsvGYFXhFHOusqY2r2_jMlyK0TzAnc";
+    console.log("Main Controller loaded");
+//    $scope.CLIENT_ID = "PHKKTXSG2M0I5CXJFKZKXQ4ALX3G3CO13YASIUEX3OPTEKWV";
+//    $scope.CLIENT_SECRET = "RQF2NDLN3ARNLQ3LDSAL2RK5WYTL20E4QW2QFNXBHLLY5IQT";
+//    $scope.GOOGLE_API_KEY = "AIzaSyAJxIsvGYFXhFHOusqY2r2_jMlyK0TzAnc";
     $scope.reviewData = {};
     $scope.isLoaded = false;
     $scope.selectedIndex = -1;
     $scope.searchText = "";
     $scope.searchResults = [];
     $scope.locationService = locationService;  
-    
+    $scope.userLocation;
     
     $scope.searchPlaces = function(keyEvent) {
       if (keyEvent.which === 13){
@@ -56,11 +56,13 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
     }
     
     $scope.searchNearbyPlacesFromFacebook = function(searchtext){
+        var userLocation = $scope.locationService.getLocation();
+        console.log(userLocation);
           $http({
             method: 'POST', 
             url: 'php/facebook_search.php',
             data:{
-                location:'',
+                location:userLocation.lat +','+ userLocation.lon,
                 searchtext:searchtext
             }
           }).
