@@ -32,7 +32,7 @@ header {
   position: fixed;
   z-index:5;
   top:0; left:0; right:0;
-  height:10rem;
+/*  height:10rem;*/
 /*
   transition:transform .5s, opacity .3s;
     transition: top 0.3s ease-in-out;
