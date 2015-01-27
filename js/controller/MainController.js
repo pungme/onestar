@@ -10,10 +10,14 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
     $scope.searchText = "";
     $scope.searchResults = [];
     $scope.locationService = locationService;  
+    $scope.showSearchLoading = false;
+    $scope.showNoResults = false;
     $scope.userLocation;
     
     $scope.searchPlaces = function(keyEvent) {
       if (keyEvent.which === 13){
+          $scope.showNoResults = false;
+          $scope.showSearchLoading = true;
           $scope.searchNearbyPlacesFromFacebook($scope.searchText);
       } 
     }
@@ -56,8 +60,8 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
     }
     
     $scope.searchNearbyPlacesFromFacebook = function(searchtext){
+        
         var userLocation = $scope.locationService.getLocation();
-        console.log(userLocation);
           $http({
             method: 'POST', 
             url: 'php/facebook_search.php',
@@ -70,9 +74,22 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
               var data = response.data;
               console.log(data);
               $scope.searchResults = data;
-              if(data == undefined){
+//              $scope.showNoResults = false;
+              
+              if(data == undefined || data.length == 0){
                 $scope.searchResults = [];
+                  console.log("here");
+                $scope.showNoResults = true;
               }
+              
+              //distance for search results.
+                for(var i = 0; i < $scope.searchResults.length ; i++){
+                    var data = $scope.searchResults[i];
+                    var location = data.location;
+                    var distance = getDistance(userLocation.lat,userLocation.lon, location.latitude, location.longitude, "K");
+                    $scope.searchResults[i].distance = Math.round(distance * 100) / 100;
+                }
+              $scope.showSearchLoading = false;
 //              console.log(data);
 //              for(var i= 0 ; i <data.length; i++){
 //	              console.log(data[i].id + "," + data[i].category);

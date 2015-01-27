@@ -15,6 +15,18 @@
             <h2>For better experiences, please allow location access. We will never store your location.</h2>
         </section>
         
+        <section class="card" ng-show="showSearchLoading">
+            <h1>
+                 Loading ...
+            </h1> 
+        </section>
+        
+        <section class="card" ng-show="showNoResults">
+            <h1>
+                 No results.
+            </h1> 
+        </section>
+        
         <!-- START SEARCH PART-->
         <section class="card"
                  ng-repeat="data in searchResults" 
@@ -32,7 +44,7 @@
                       {{data.location.street}} 
                       {{data.location.zip}}  
                       , 
-<!--                      {{data.distance}} km away-->
+                      {{data.distance}} km away
                   </span>
               </h1>
 
