@@ -10,24 +10,31 @@
         
 <!--        <header></header>-->
 <!--        <button ng-click="facebookLogin()">Facebook Login</button>-->
-        <section class="card" ng-show="!isLoaded">
+        
+        
+        <!--  START   NOTIFICATION PART  -->
+        <section class="card animate-show" ng-show="!isLoaded">
             <h1>Loading ..</h1>
             <h2>For better experiences, please allow location access. We will never store your location.</h2>
         </section>
         
-        <section class="card" ng-show="showSearchLoading">
+        <section class="card animate-show" ng-show="showSearchLoading">
             <h1>
                  Loading ...
             </h1> 
         </section>
         
-        <section class="card" ng-show="showNoResults">
+        <section class="card animate-show" ng-show="showNoResults">
             <h1>
                  No results.
             </h1> 
         </section>
+        <!-- END NOTIFICATION PART   -->
         
-        <!-- START SEARCH PART-->
+        
+        
+        
+        <!-- START SEARCH RESULTS PART-->
         <section class="card"
                  ng-repeat="data in searchResults" 
                  >
@@ -35,7 +42,7 @@
             <h1 style="margin-top: 5px;">
                   <strong>
 <!--                      <a ng-click='onPlaceNameClick(data.get("place").id)'>-->
-                      <a ng-click='onPlaceNameClick(data.get("place").id)'>
+                      <a ng-click='onSearchResultPlaceNameClick(data)'>
                           {{data.name}}
                       </a> 
                   </strong>
@@ -48,10 +55,21 @@
                   </span>
               </h1>
 
+              <h1 ng-show="selectedIndex != $index">
+                  {{data.loadingText}}
+              </h1>
+            
         </section>
         <!-- END SEARCH PART -->
         
-        
+<!--
+        <div class="card-flip-front">
+          Front
+        </div>
+        <div class="card-flip-back">
+          Back
+        </div>
+-->
         
         <section class="card" 
                  ng-repeat="data in reviewData" 
@@ -145,44 +163,27 @@
                         disqus-url="http://www.onestar.reviews?{{data.id}}">
             </dir-disqus>
             
-<!--
-            <span class="disqus-comment-count" 
-                  data-disqus-url="http://www.onestar.reviews?{{data.id}}"> 
-            </span>
--->
-            
-            <!--
 
-            <div id="disqus_thread"
-                 style="float: left;margin-left: 20px;width: 70%;">
-            </div>
--->
-            
-
-            
             
         </section>
         
-<!--        TODO : ng-repeat for the reviewer cards .... -->
+<!--
+        <div class="card-flip-back">
+          Back
+        </div>
+-->
+<!--    TEST CARD Flip effect    -->
+<!--
+    <div class="card-flip">
+        <div class="card-flip-front">
+          Front
+        </div>
+        <div class="card-flip-back">
+          Back
+        </div>
+      </div>
+-->
+        
         
     </main>
     
-<!--    {{fourSqData}}-->
-<!--<div ng-view></div>-->
-<!--
-<script type="text/javascript">
-
-function initialize() {
-    var latlng = new google.maps.LatLng(-34.397, 150.644);
-    var myOptions = {
-        zoom: 8,
-        center: latlng,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    var map = new google.maps.Map(document.getElementById("map-canvas"),
-            myOptions);
-}
-google.maps.event.addDomListener(window, "load", initialize);
-
-</script>
--->

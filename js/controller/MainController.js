@@ -22,41 +22,121 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
       } 
     }
     
+    $scope.createNewPlace = function(data){
+          
+          $http({
+            method: 'POST', 
+            url: 'php/facebook_place.php',
+            data:{
+                place_id:data.id,
+                parameter:'/picture?type=large&redirect=false&'
+            }
+          }).
+          success(function(response, status, headers, config) {
+              var pictureUrl = response.data.url;
+
+                  $http({
+                    method: 'POST', 
+                    url: 'php/facebook_place.php',
+                    data:{
+                        place_id:data.id,
+                        parameter:'?'
+                    }
+                  }).
+                  success(function(response, status, headers, config) {
+                        var placeData = response;
+                        console.log(response);
+                        var Places = Parse.Object.extend("Places");
+                        var place = new Places();
+
+                        place.set("name", placeData.name);
+                        var point = new Parse.GeoPoint({latitude: placeData.location.latitude, longitude: placeData.location.longitude});
+                        place.set("location", point);
+                        place.set("place_id", placeData.id);
+                        place.set("image_url", pictureUrl);
+                        place.set("city", placeData.location.city);
+                        place.set("country", placeData.location.country);
+//                        place.set("state", placeData.location.state);
+                        place.set("street", placeData.location.street);
+                        place.set("zip", placeData.location.zip);
+                        place.set("category", placeData.location.category);
+                        place.set("description", placeData.description);
+                      
+                        place.save(null, {
+                          success: function(object) {
+                              console.log('new object saved');
+                              console.log(object);
+                              window.location = '#place?objectId=' + object.id;
+                            // Execute any logic that should take place after the object is saved.
+//                            alert('New object created with objectId: ' + gameScore.id);
+                          },
+                          error: function(object, error) {
+                            // Execute any logic that should take place if the save fails.
+                            // error is a Parse.Error with an error code and message.
+//                            alert('Failed to create new object, with error code: ' + error.message);
+                          }
+                        });
+                  }).
+                  error(function(data, status, headers, config) {
+                      console.log("AJAX Error.");
+                  });
+//              console.log(response);
+            
+          }).
+          error(function(data, status, headers, config) {
+              console.log("AJAX Error.");
+          });
+    }
+    
+    $scope.onSearchResultPlaceNameClick = function(data){
+        console.log(data);
+        // look up in parse, if exist go to url
+        // if not add new, and go to the url with that objectid
+    
+        var Places = Parse.Object.extend("Places");
+        var query = new Parse.Query(Places);
+        query.equalTo("place_id", data.id);
+
+        query.first({
+          success: function(object) {
+              if(object){
+                    window.location = '#place?objectId=' + object.id;
+              }else{
+                  //visualize loading .... 
+                    $scope.createNewPlace(data);
+              }
+//              $scope.place = object;
+//
+////              $scope.getPlaceDescription(object.get("place_id"));
+//              
+//              if($scope.userLocation){
+//                $scope.calculateDistance($scope.userLocation.lat,$scope.userLocation.lon);
+//              }
+//              
+//              $scope.loadReviewsOfPlace($scope.place);
+          },
+          error: function(error) {
+            console.log("Error: " + error.code + " " + error.message);
+          }
+        });
+        
+       
+    }
+    
+//    $scope.mouseDown = function(){
+//        $scope.showFlipBack = true;
+//    }
+//    
+//    $scope.mouseUp = function(){
+//        $scope.showFlipBack = false;
+//    }
+//    
+    
     $scope.askForFacebookLogin = function(){
         //TODO:
     }
     $scope.onPlaceNameClick =function(object_id){
         window.location = '#place?objectId=' + object_id;
-        //forget about facebook login just for now .... 
-//        $scope.askForFacebookLogin();
-        //ask for facebook login //
-//        if(Parse.User.current()){
-//            window.location = '#place?objectId=' + object_id;
-//        }else{
-//        FB.logout();
-//        var userAuth = Parse.User.current().get('authData')['facebook'];
-//        console.log(userAuth);
-////        console.log(FB.getAuthResponse());
-//            Parse.FacebookUtils.logIn({
-//                "id": userAuth.id,
-//                "access_token": userAuth.access_token,
-//                "expiration_date": userAuth.expiration_date
-//            }, {
-//              success: function(user) {
-//                if (!user.existed()) {
-//                  window.location = '#place?objectId=' + object_id;
-//                  console.log("User signed up and logged in through Facebook!");
-//                } else {
-//                  window.location = '#place?objectId=' + object_id;
-//                  console.log("User logged in through Facebook!");
-//                }
-//              },
-//              error: function(user, error) {
-////                window.location = '#place?objectId=' + object_id;
-//                console.log("User cancelled the Facebook login or did not fully authorize.");
-//              }
-//            });
-//        }
     }
     
     $scope.searchNearbyPlacesFromFacebook = function(searchtext){
@@ -78,7 +158,6 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
               
               if(data == undefined || data.length == 0){
                 $scope.searchResults = [];
-                  console.log("here");
                 $scope.showNoResults = true;
               }
               
@@ -90,30 +169,12 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
                     $scope.searchResults[i].distance = Math.round(distance * 100) / 100;
                 }
               $scope.showSearchLoading = false;
-//              console.log(data);
-//              for(var i= 0 ; i <data.length; i++){
-//	              console.log(data[i].id + "," + data[i].category);
-//	              
-//              }
+
           }).
           error(function(data, status, headers, config) {
               console.log("AJAX Error.");
           });
-          
-//          $http({
-//            method: 'POST', 
-//            url: 'php/facebook_rating.php'
-//          }).
-//          success(function(response, status, headers, config) {
-//          	console.log(response);
-//
-//          }).
-//          error(function(data, status, headers, config) {
-//              console.log("AJAX Error.");
-//          });
     }
-//    $scope.getNearbyPlacesFromFacebook();
-    
     
     /////////// STILL Struggling /////////// 
     $scope.facebookLogin = function(){
