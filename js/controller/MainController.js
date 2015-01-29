@@ -239,9 +239,9 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
               $scope.isLoaded = true;
               $scope.$apply();
               
-              setTimeout(function() {
-                    $scope.injectDisqusComment();
-              }, 4000);
+//              setTimeout(function() {
+//                    $scope.injectDisqusComment();
+//              }, 4000);
 //              $scope.injectDisqusComment();
           },
           error: function(error) {
