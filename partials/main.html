@@ -37,12 +37,13 @@
         <!-- START SEARCH RESULTS PART-->
         <section class="card"
                  ng-repeat="data in searchResults" 
+                 ng-class="{'place-search-select': $index == searchSelectIndex}"
                  >
             
             <h1 style="margin-top: 5px;">
                   <strong>
 <!--                      <a ng-click='onPlaceNameClick(data.get("place").id)'>-->
-                      <a ng-click='onSearchResultPlaceNameClick(data)'>
+                      <a ng-click='onSearchResultPlaceNameClick(data,$index)'>
                           {{data.name}}
                       </a> 
                   </strong>
@@ -55,9 +56,11 @@
                   </span>
               </h1>
 
+<!--
               <h1 ng-show="selectedIndex != $index">
                   {{data.loadingText}}
               </h1>
+-->
             
         </section>
         <!-- END SEARCH PART -->

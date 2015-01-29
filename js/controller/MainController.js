@@ -7,6 +7,7 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
     $scope.reviewData = {};
     $scope.isLoaded = false;
     $scope.selectedIndex = -1;
+    $scope.searchSelectIndex = -1;
     $scope.searchText = "";
     $scope.searchResults = [];
     $scope.locationService = locationService;  
@@ -45,7 +46,7 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
                   }).
                   success(function(response, status, headers, config) {
                         var placeData = response;
-                        console.log(response);
+                        console.log(placeData);
                         var Places = Parse.Object.extend("Places");
                         var place = new Places();
 
@@ -67,13 +68,10 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
                               console.log('new object saved');
                               console.log(object);
                               window.location = '#place?objectId=' + object.id;
-                            // Execute any logic that should take place after the object is saved.
-//                            alert('New object created with objectId: ' + gameScore.id);
+
                           },
                           error: function(object, error) {
-                            // Execute any logic that should take place if the save fails.
-                            // error is a Parse.Error with an error code and message.
-//                            alert('Failed to create new object, with error code: ' + error.message);
+                            console.log(error);
                           }
                         });
                   }).
@@ -88,8 +86,12 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
           });
     }
     
-    $scope.onSearchResultPlaceNameClick = function(data){
+    $scope.onSearchResultPlaceNameClick = function(data,$index){
         console.log(data);
+        console.log($index);
+        if($scope.searchSelectIndex != $index){ // check if click the same
+            $scope.searchSelectIndex = $index;
+        }
         // look up in parse, if exist go to url
         // if not add new, and go to the url with that objectid
     

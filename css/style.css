@@ -615,4 +615,8 @@ footer h1{
 /*  background: gray;*/
 }
 
+.place-search-select{
+    pointer-events: none;
+    opacity: 0.5;
+}
 
