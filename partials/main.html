@@ -3,9 +3,10 @@
         
         <input placeholder="Search" 
                autocomplete="on" 
-               ng-focus="searchFocus()" 
-               ng-blur="searchBlur()"
+               ng-change="onSearchType(searchText)"
+               ng-focus="searchFocus()"
                ng-model="searchText"
+               ng-class="{'searchbar-focus': searchText}"
                ng-keypress="searchPlaces($event)"/>
         
 <!--        <header></header>-->
@@ -55,24 +56,8 @@
                       {{data.distance}} km away
                   </span>
               </h1>
-
-<!--
-              <h1 ng-show="selectedIndex != $index">
-                  {{data.loadingText}}
-              </h1>
--->
             
         </section>
-        <!-- END SEARCH PART -->
-        
-<!--
-        <div class="card-flip-front">
-          Front
-        </div>
-        <div class="card-flip-back">
-          Back
-        </div>
--->
         
         <section class="card" 
                  ng-repeat="data in reviewData" 

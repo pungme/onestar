@@ -92,13 +92,39 @@ input {
   transition:.5s, margin-bottom .15s;
 }
 
-input:focus {
+.searchbar-focus{
     margin: 0rem -1rem 2rem;
-/*  margin:0 1rem 1rem;*/
-/*  width:28rem;*/
     width: 100%;
   outline:0;
 }
+
+input:focus {
+    margin: 0rem -1rem 2rem;
+    width: 100%;
+  outline:0;
+}
+
+/*
+input:focus + .nav-down{
+  -webkit-transform:translate3d(0,-10rem,0);
+  transform:translate3d(0,-10rem,0);
+  opacity:0;
+}
+*/
+
+/*
+input:focus {
+    margin: 0rem -1rem 2rem;
+    width: 100%;
+  outline:0;
+}
+
+input:focus + .nav-down{
+  -webkit-transform:translate3d(0,-10rem,0);
+  transform:translate3d(0,-10rem,0);
+  opacity:0;
+}
+*/
 
 /*
 input:focus + header {
@@ -108,11 +134,6 @@ input:focus + header {
 }
 */
 
-input:focus + .nav-down{
-  -webkit-transform:translate3d(0,-10rem,0);
-  transform:translate3d(0,-10rem,0);
-  opacity:0;
-}
 /*
 input:focus + header {
   -webkit-transform:translate3d(0,-10rem,0);
@@ -367,7 +388,7 @@ footer h1{
 #circle-logo {
     border: 1px solid #588DEC;
     background-color: #588DEC;
-    width: 90px;
+/*    width: 90px;*/
     text-align: center;
     display: block;
      margin-top: 22px; 

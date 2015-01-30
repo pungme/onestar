@@ -197,6 +197,17 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
         });
     }
     
+    $scope.onSearchType = function(searchText){
+        console.log(searchText);   
+        if(searchText.length <= 0){
+            $('#circle-logo ').css('width', '100px').css('height','100px');
+            $('#star-logo').css('width', '80px').css('margin-top','9px');
+        }else{
+            $('#circle-logo ').css('width', '50px').css('height','50px');
+            $('#star-logo').css('width', '40px').css('margin-top','4px');
+        }
+    }
+    
     $scope.searchFocus = function(){
         $('#circle-logo ').css('width', '50px').css('height','50px');
         $('#star-logo').css('width', '40px').css('margin-top','4px');
