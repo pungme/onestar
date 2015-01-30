@@ -14,6 +14,17 @@ oneStarApp.controller("MasterController",[ '$scope','$http', 'locationService',f
         }());
    }
    
+   $scope.shrinkLogo = function(){
+        $('#circle-logo ').css('width', '50px').css('height','50px');
+        $('#star-logo').css('width', '40px').css('margin-top','4px');
+   }
+   
+   $scope.enlargeLogo = function(){
+        $('#circle-logo ').css('width', '100px').css('height','100px');
+        $('#star-logo').css('width', '80px').css('margin-top','9px');
+   }
+    
+    
 //   $scope.hoverInCard = function(){
 //       $scope.injectDisqusComment();
 //   }

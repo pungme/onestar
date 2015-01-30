@@ -16,14 +16,59 @@
         
         <!--  START   NOTIFICATION PART  -->
         <section class="card animate-show" ng-show="!isLoaded">
-            <h1>Loading ..</h1>
-            <h2>For better experiences, please allow location access. We will never store your location.</h2>
+            
+<!--  //////////// LOADING ANIMATION // TODO: make it as template or use only css ! ////////////-->
+            <svg width="70" height="20" style="position: absolute; fill: cornflowerblue;">
+              <rect width="20" height="20" x="0" y="0" rx="3" ry="3">
+                <animate attributeName="width" values="0;20;20;20;0" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="height" values="0;20;20;20;0" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="x" values="10;0;0;0;10" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="y" values="10;0;0;0;10" dur="1000ms" repeatCount="indefinite"/>
+              </rect>
+              <rect width="20" height="20" x="25" y="0" rx="3" ry="3">
+                <animate attributeName="width" values="0;20;20;20;0" begin="200ms" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="height" values="0;20;20;20;0" begin="200ms" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="x" values="35;25;25;25;35" begin="200ms" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="y" values="10;0;0;0;10" begin="200ms" dur="1000ms" repeatCount="indefinite"/>
+              </rect>
+              <rect width="20" height="20" x="50" y="0" rx="3" ry="3">
+                <animate attributeName="width" values="0;20;20;20;0" begin="400ms" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="height" values="0;20;20;20;0" begin="400ms" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="x" values="60;50;50;50;60" begin="400ms" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="y" values="10;0;0;0;10" begin="400ms" dur="1000ms" repeatCount="indefinite"/>
+              </rect>
+            </svg>
+<!--  LOADING ANIMATION // TODO: make it as template ! -->
+            
+<!--            <h1>Loading ..</h1>-->
+            <h2 style="margin-top: 7em;">
+                <center> For better experiences, please allow location access. We will never store your location.</center>
+            </h2>
         </section>
         
         <section class="card animate-show" ng-show="showSearchLoading">
-            <h1>
-                 Loading ...
-            </h1> 
+<!--  //////////// LOADING ANIMATION // TODO: make it as template or use only css ! ////////////-->
+            <svg width="70" height="20" style="position: absolute; fill: cornflowerblue;">
+              <rect width="20" height="20" x="0" y="0" rx="3" ry="3">
+                <animate attributeName="width" values="0;20;20;20;0" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="height" values="0;20;20;20;0" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="x" values="10;0;0;0;10" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="y" values="10;0;0;0;10" dur="1000ms" repeatCount="indefinite"/>
+              </rect>
+              <rect width="20" height="20" x="25" y="0" rx="3" ry="3">
+                <animate attributeName="width" values="0;20;20;20;0" begin="200ms" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="height" values="0;20;20;20;0" begin="200ms" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="x" values="35;25;25;25;35" begin="200ms" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="y" values="10;0;0;0;10" begin="200ms" dur="1000ms" repeatCount="indefinite"/>
+              </rect>
+              <rect width="20" height="20" x="50" y="0" rx="3" ry="3">
+                <animate attributeName="width" values="0;20;20;20;0" begin="400ms" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="height" values="0;20;20;20;0" begin="400ms" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="x" values="60;50;50;50;60" begin="400ms" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="y" values="10;0;0;0;10" begin="400ms" dur="1000ms" repeatCount="indefinite"/>
+              </rect>
+            </svg>
+<!--  LOADING ANIMATION // TODO: make it as template ! -->
         </section>
         
         <section class="card animate-show" ng-show="showNoResults">
@@ -41,6 +86,31 @@
                  ng-repeat="data in searchResults" 
                  ng-class="{'place-search-select': $index == searchSelectIndex}"
                  >
+            
+            <!--  //////////// LOADING ANIMATION // TODO: make it as template or use only css ! ////////////-->
+            <div ng-show="$index == searchSelectIndex">
+            <svg width="70" height="20" style="position: absolute; fill: cornflowerblue;">
+              <rect width="20" height="20" x="0" y="0" rx="3" ry="3">
+                <animate attributeName="width" values="0;20;20;20;0" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="height" values="0;20;20;20;0" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="x" values="10;0;0;0;10" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="y" values="10;0;0;0;10" dur="1000ms" repeatCount="indefinite"/>
+              </rect>
+              <rect width="20" height="20" x="25" y="0" rx="3" ry="3">
+                <animate attributeName="width" values="0;20;20;20;0" begin="200ms" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="height" values="0;20;20;20;0" begin="200ms" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="x" values="35;25;25;25;35" begin="200ms" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="y" values="10;0;0;0;10" begin="200ms" dur="1000ms" repeatCount="indefinite"/>
+              </rect>
+              <rect width="20" height="20" x="50" y="0" rx="3" ry="3">
+                <animate attributeName="width" values="0;20;20;20;0" begin="400ms" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="height" values="0;20;20;20;0" begin="400ms" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="x" values="60;50;50;50;60" begin="400ms" dur="1000ms" repeatCount="indefinite"/>
+                <animate attributeName="y" values="10;0;0;0;10" begin="400ms" dur="1000ms" repeatCount="indefinite"/>
+              </rect>
+            </svg>
+            </div>
+            <!--  LOADING ANIMATION // TODO: make it as template ! -->
             
             <h1 style="margin-top: 5px;">
                   <strong>

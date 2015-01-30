@@ -622,6 +622,14 @@ footer h1{
   z-index: 2; /* for IE 9 */
 }
 
+/*/////////////// Loader stuff //////////////////*/
+
+svg {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  margin: auto;
+  rect { fill: #a7a7a7; }
+}
 
 /* Instance-specific example styles */
 
@@ -642,4 +650,6 @@ footer h1{
     pointer-events: none;
     opacity: 0.5;
 }
+
+
 
