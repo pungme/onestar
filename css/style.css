@@ -57,6 +57,7 @@ header h1{
 }
 
 header img{
+    will-change: transform;
     width: 80px;
     display:block;
     margin-top: 9px;
@@ -78,6 +79,7 @@ input, .card {
 }
 /*Search bar*/
 input {
+    will-change: margin-bottom;
     z-index: 6;
   display:block;
   width:16rem;
