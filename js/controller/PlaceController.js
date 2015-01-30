@@ -4,6 +4,9 @@
 oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locationService',
                                   function($scope,$http,$location,locationService){
     
+    $('#circle-logo ').css('width', '100px').css('height','100px');
+    $('#star-logo').css('width', '80px').css('margin-top','9px');                                  
+                                      
     $scope.place = {};
     $scope.reviews = {};
     $scope.selectedIndex = -1;                                 

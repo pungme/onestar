@@ -5,6 +5,7 @@
                autocomplete="on" 
                ng-change="onSearchType(searchText)"
                ng-focus="searchFocus()"
+               ng-blur="searchBlur()"
                ng-model="searchText"
                ng-class="{'searchbar-focus': searchText}"
                ng-keypress="searchPlaces($event)"/>

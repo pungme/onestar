@@ -197,11 +197,13 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
         });
     }
     
+    
+    ////////// TODO : refactor this shit, move it to core graphics /////////
     $scope.onSearchType = function(searchText){
         console.log(searchText);   
         if(searchText.length <= 0){
-            $('#circle-logo ').css('width', '100px').css('height','100px');
-            $('#star-logo').css('width', '80px').css('margin-top','9px');
+//            $('#circle-logo ').css('width', '100px').css('height','100px');
+//            $('#star-logo').css('width', '80px').css('margin-top','9px');
         }else{
             $('#circle-logo ').css('width', '50px').css('height','50px');
             $('#star-logo').css('width', '40px').css('margin-top','4px');
@@ -214,8 +216,13 @@ oneStarApp.controller("MainController",[ '$scope','$http', 'locationService',fun
     }
     
     $scope.searchBlur = function(){
-        $('#circle-logo ').css('width', '100px').css('height','100px');
-        $('#star-logo').css('width', '80px').css('margin-top','9px');
+        if($scope.searchText.length <= 0){
+            $('#circle-logo ').css('width', '100px').css('height','100px');
+            $('#star-logo').css('width', '80px').css('margin-top','9px');
+        }else {
+            $('#circle-logo ').css('width', '50px').css('height','50px');
+            $('#star-logo').css('width', '40px').css('margin-top','4px');
+        }
     }
     
     /////////// TODO: move this to core-graphic.js ///////////
