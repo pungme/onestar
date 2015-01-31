@@ -9,12 +9,31 @@ oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locatio
                                       
     $scope.place = {};
     $scope.reviews = {};
-    $scope.selectedIndex = -1;                                 
+    $scope.selectedIndex = -1;   
+    $scope.isLoaded = false;
     $scope.objectId = $location.search().objectId;
     $scope.locationService = locationService;
     $scope.userLocation = $scope.locationService.getLocation();
+    $scope.userReviewText = "";
 
-    //TODO: get place from objectId and get all review of this place.
+    $scope.submitReview = function(){
+        console.log("submit review");
+    }
+    
+    ////////////// Move this to core animation ////////////                                  
+    $scope.reviewFocus = function(){
+        $('.comment-area').css('height','150px');
+    }
+    
+    $scope.reviewBlur = function(){
+        if($scope.userReviewText.length > 0){
+            $('.comment-area').css('height','150px');
+        }else {
+            $('.comment-area').css('height','35px');
+        }
+    }
+    ////////////// Move this to core animation //////////// 
+    
     $scope.cardClick = function($index){
         if($scope.selectedIndex != $index){ // check if click the same
             $scope.selectedIndex = $index;
@@ -60,6 +79,7 @@ oneStarApp.controller("PlaceController",[ '$scope','$http','$location', 'locatio
               }
               
               $scope.loadReviewsOfPlace($scope.place);
+              $scope.isLoaded = true;
           },
           error: function(error) {
             console.log("Error: " + error.code + " " + error.message);
